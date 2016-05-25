@@ -33,7 +33,8 @@ public class Controleur {
                     jouerUnCoup(j);
                 }
                 if (i.equals(Joueurs.size()-1)){
-                    
+                    i = 0;
+//                    j = 
                 }
             }
         }
