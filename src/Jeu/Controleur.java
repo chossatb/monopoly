@@ -25,11 +25,10 @@ public class Controleur {
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> Joueurs){
             for(Joueur j : Joueurs.values()){
-                jouerUnCoup(j);/*
-                while (dbl){
+                jouerUnCoup(j);
+                while (de1 == de2){
                     jouerUnCoup(j);
-                    
-                }*/
+                }
             }
         }
 
@@ -50,11 +49,6 @@ public class Controleur {
                 this.setDe2((int)(Math.random() * (max-min)) + min);
                 return getDe1() + getDe2();
 	}
-        
-//        private boolean estDouble(){
-//            lancerDes();
-//            return de1 = de2;
-//        }
 
 	private Carreau setNouveauCarreau(int aD, Carreau cCour) {
 		int num = cCour.getNumero();
