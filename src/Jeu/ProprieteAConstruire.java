@@ -49,6 +49,22 @@ public class ProprieteAConstruire extends Propriete{
     
             @Override
           public int calculLoyer(int sommeLances) {
-              return 0;
+              int l = super.getPrixLoyer();
+              Groupe g = this.getGroupe();
+              Joueur j = super.getProprietaire();
+              int nb = 0; //représente le nombre de propriétés du groupe (en fonction de la couleur) que posséde le propriétaire
+              
+              for (ProprieteAConstruire i : j.getPropietes_a_construire()){
+                  if (i.getGroupe().getCouleur().equals(this.getGroupe().getCouleur())){
+                      nb =+ 1;
+                  }
+              }
+              
+              if (nb == this.getGroupe().getNbProprietes()) {
+                  return (l * 2);
+              }
+              else{
+                  return (l);
+              }
           }
 }

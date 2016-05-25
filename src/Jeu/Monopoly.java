@@ -75,10 +75,14 @@ public class Monopoly {
 				if(caseType.compareTo("P") == 0){
 					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         for (Groupe groupe : groupes){
-                                            if (data.get(i)[4] == groupe.getCouleur()) {
+                                            if (data.get(i)[4].equals( groupe.getCouleur() )) {
                                                 carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupe));
+
                                             }
-                                            else carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, null));
+                                            else {
+                                                carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, null));
+
+                                            }
                                         }
 				}
 				else if(caseType.compareTo("G") == 0){

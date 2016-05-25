@@ -10,7 +10,7 @@ public class Joueur {
 	private int cash;
 	public ArrayList<Gare> gares;
         public ArrayList<Compagnie> compagnies;
-        public ArrayList<ProprieteAConstruire> propietes_a_construire;
+        private ArrayList<ProprieteAConstruire> propietes_a_construire;
 	private Carreau positionCourante;
         
         
@@ -26,6 +26,7 @@ public class Joueur {
         public String getNom(){
             return this.nomJoueur;
         }
+        
 
 	public void payerLoyer(int aL) {
             this.cash =- aL;
@@ -60,7 +61,7 @@ public class Joueur {
         }
         
         public void addProprieteAConstruire(ProprieteAConstruire p){
-            this.propietes_a_construire.add(p);
+            this.getPropietes_a_construire().add(p);
         }
         
         public int getNbGare(){
@@ -69,4 +70,16 @@ public class Joueur {
         public int getNbCompagnies(){
             return compagnies.size();
         }
+        public int getNbProprietes(){
+            return getPropietes_a_construire().size();
+        }
+
+    /**
+     * @return the propietes_a_construire
+     */
+    public ArrayList<ProprieteAConstruire> getPropietes_a_construire() {
+        return propietes_a_construire;
+    }
+        
+        
 }
