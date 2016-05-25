@@ -11,10 +11,44 @@ public class ProprieteAConstruire extends Propriete{
             
         }
 
+            @Override
+	public Propriete action(Joueur aJ, int sommeLances) {
+               Joueur jProprio = this.getProprietaire();
+               if (jProprio == null){
+                   this.acheterPropriete(aJ);   
+               }
+               else if (jProprio != aJ) {
+                   int l = this.calculLoyer(0);
+                   aJ.payerLoyer(l);
+                   jProprio.recevoirLoyer(l);
+               }
+               return this;
+        }
+    
+    
     /**
      * @return the groupe
      */
     public Groupe getGroupe() {
         return groupe;
     }
+    
+    @Override
+    public boolean acheterPropriete(Joueur j){
+        if(j.getCash() >= this.getPrixAchat()){
+            this.setProprietaire(j);
+            j.diminuerCash(this.getPrixAchat());
+            j.addProprieteAConstruire(this);
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+    
+            @Override
+          public int calculLoyer(int sommeLances) {
+              return 0;
+          }
 }

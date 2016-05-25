@@ -44,23 +44,13 @@ public abstract class Propriete extends Carreau {
         this.proprietaire = proprietaire;
     }
     
-    
-    public int calculLoyer(){ //a compléter
-        return 0;
-    }
+    public abstract int calculLoyer(int sommeLances);
     
     public abstract boolean acheterPropriete(Joueur j);
-//        if(j.getCash() >= this.getPrixAchat()){
-//            this.setProprietaire(j);
-//            j.diminuerCash(this.getPrixAchat());
-//            j.addPropriete(this);
-//            return true;
-//        }
-//        else{
-//            return false;
+    
+    public abstract Propriete action(Joueur j, int sommeLances);
+    
+    
 
-        //faire dans priprio, gare et compagnie
-        
-    }
     
 }

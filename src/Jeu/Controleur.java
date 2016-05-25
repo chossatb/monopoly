@@ -8,6 +8,16 @@ public class Controleur {
 	public Monopoly monopoly;
 
 	public void jouerUnCoup(Joueur aJ) {
+            Carreau c = this.lancerDesAvancer(aJ);
+            if (c instanceof Gare){
+                
+            }
+            if (c instanceof Compagnie){
+                
+            }
+            if (c instanceof ProprieteAConstruire){
+                
+            }
 	}
 
 	private Carreau lancerDesAvancer(Joueur aJ) {

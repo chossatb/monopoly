@@ -24,11 +24,11 @@ public class Joueur {
         }
 
 	public void payerLoyer(int aL) {
-		throw new UnsupportedOperationException();
+            this.cash =- aL;
 	}
 
 	public void recevoirLoyer(int aL) {
-		throw new UnsupportedOperationException();
+            this.cash =+ aL;
 	}
 
 	public int getCash() {
@@ -57,5 +57,12 @@ public class Joueur {
         
         public void addProprieteAConstruire(ProprieteAConstruire p){
             this.propietes_a_construire.add(p);
+        }
+        
+        public int getNbGare(){
+            return gares.size();
+        }
+        public int getNbCompagnies(){
+            return compagnies.size();
         }
 }
