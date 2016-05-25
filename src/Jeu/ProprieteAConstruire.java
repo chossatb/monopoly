@@ -49,6 +49,6 @@ public class ProprieteAConstruire extends Propriete{
     
             @Override
           public int calculLoyer(int sommeLances) {
-              return 0;
+              return null;
           }
 }
