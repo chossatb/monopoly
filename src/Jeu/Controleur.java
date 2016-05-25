@@ -4,13 +4,15 @@ import Ui.*;
 import java.math.*;
 
 public class Controleur {
-	public IHM ihm;
-	public Monopoly monopoly;
+	private IHM ihm;
+	private Monopoly monopoly;
+        private int de1;
+        private int de2;
 
 	public void jouerUnCoup(Joueur aJ) {
             Carreau c = this.lancerDesAvancer(aJ);
             if (c instanceof Gare){
-                ((Gare) c).action(aJ, 3);
+                ((Gare) c).action(aJ,(this.de1 + this.de2));
             }
             if (c instanceof Compagnie){
                 
@@ -28,13 +30,14 @@ public class Controleur {
                 return cCour;
                 
 	}
+        
 
 	private int lancerDes() {
                 int min = 1;
                 int max = 7;
-		int de1 = (int)(Math.random() * (max-min)) + min;
-                int de2 = (int)(Math.random() * (max-min)) + min;
-                return de1 + de2;
+                this.setDe1((int)(Math.random() * (max-min)) + min);
+                this.setDe2((int)(Math.random() * (max-min)) + min);
+                return getDe1() + getDe2();
 
 	}
 
@@ -44,6 +47,34 @@ public class Controleur {
                 cCour = monopoly.getCarreau(num);
                 return cCour;
 	}
+
+    /**
+     * @return the de1
+     */
+    public int getDe1() {
+        return de1;
+    }
+
+    /**
+     * @param de1 the de1 to set
+     */
+    public void setDe1(int de1) {
+        this.de1 = de1;
+    }
+
+    /**
+     * @return the de2
+     */
+    public int getDe2() {
+        return de2;
+    }
+
+    /**
+     * @param de2 the de2 to set
+     */
+    public void setDe2(int de2) {
+        this.de2 = de2;
+    }
 
 
 }
