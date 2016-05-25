@@ -10,7 +10,7 @@ public class Controleur {
 	public void jouerUnCoup(Joueur aJ) {
             Carreau c = this.lancerDesAvancer(aJ);
             if (c instanceof Gare){
-                
+                ((Gare) c).action(aJ, 3);
             }
             if (c instanceof Compagnie){
                 
