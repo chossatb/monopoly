@@ -53,7 +53,7 @@ public class Monopoly {
                                 
                                 String nom = data.get(i)[2];
                                 int numero = Integer.parseInt(data.get(i)[1]);
-                                if (caseType != "AU"){
+                                if (caseType != "AU") {
                                     int prixAchat = Integer.parseInt(data.get(i)[5]);
                                     int prixLoyer = Integer.parseInt(data.get(i)[6]);
                                 } else {
