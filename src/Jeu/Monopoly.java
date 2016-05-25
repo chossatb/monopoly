@@ -75,8 +75,8 @@ public class Monopoly {
 				if(caseType.compareTo("P") == 0){
 					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         for (Groupe groupe : groupes){
-                                            if (data.get(i)[6] == groupe.getCouleur()) {
-                                                carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, g));
+                                            if (data.get(i)[4] == groupe.getCouleur()) {
+                                                carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupe));
                                             }
                                             else carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, null));
                                         }
@@ -99,7 +99,6 @@ public class Monopoly {
                         
                         for (HashMap.Entry<Integer, Carreau> c : carreaux.entrySet()){
                             System.out.println(c.getValue().getNumero() + " : " + c.getValue().getNomCarreau());
-                            if (c.getValue().getNumero() == 10)
                         }
 			
 		} 
