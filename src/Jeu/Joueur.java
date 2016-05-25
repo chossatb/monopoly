@@ -14,13 +14,13 @@ public class Joueur {
 	private Carreau positionCourante;
         
         
-        public Joueur(String nom) {
+        public Joueur(String nom, Carreau depart) {
             nomJoueur = nom;
             this.cash = 1500;
             gares = new ArrayList<Gare>();
             compagnies = new ArrayList<Compagnie>();
             propietes_a_construire = new ArrayList<ProprieteAConstruire>();
-            //this.positionCourante = new Carreau(0,
+            this.setCarreau(depart);
         }
         
         public String getNom(){
@@ -49,7 +49,7 @@ public class Joueur {
 	}
 
 	public void setCarreau(Carreau aCCour) {
-		throw new UnsupportedOperationException();
+		this.positionCourante = aCCour;
 	}
         
         public void addGare(Gare g){

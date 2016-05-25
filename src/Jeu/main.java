@@ -13,34 +13,35 @@ public class main {
     
     public static void main (String[] args){
         
-        
+        Controleur c = new Controleur();
         Monopoly monopoly = new Monopoly();
         monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
         
         
-        Joueur j = new Joueur("Michel");
+        Joueur j = new Joueur("Michel", monopoly.getCarreau(1));
         monopoly.creerJoueur(j);
         
-        Joueur j1 = new Joueur("Michel1");
+        Joueur j1 = new Joueur("Michel1", monopoly.getCarreau(1));
         monopoly.creerJoueur(j1);
         
-        Joueur j2 = new Joueur("Michel2");
+        Joueur j2 = new Joueur("Michel2", monopoly.getCarreau(1));
         monopoly.creerJoueur(j2);
         
-        Joueur j3 = new Joueur("Michel3");
+        Joueur j3 = new Joueur("Michel3", monopoly.getCarreau(1));
         monopoly.creerJoueur(j3);
         
-        Joueur j4 = new Joueur("Michel4");
+        Joueur j4 = new Joueur("Michel4", monopoly.getCarreau(1));
         monopoly.creerJoueur(j4);
         
-        Joueur j5 = new Joueur("Michel5");
+        Joueur j5 = new Joueur("Michel5", monopoly.getCarreau(1));
         monopoly.creerJoueur(j5);
         
-        Joueur j6 = new Joueur("Michel6");
+        Joueur j6 = new Joueur("Michel6", monopoly.getCarreau(1));
         monopoly.creerJoueur(j6);
                 
         monopoly.parcourJoueurs();
         
+        c.jouerUnCoup(j);
         
         
         
