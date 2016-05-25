@@ -15,7 +15,7 @@ public class main {
         
         
         Monopoly monopoly = new Monopoly();
-        monopoly.CreerPlateau("data.txt");
+        monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
     
     
     }

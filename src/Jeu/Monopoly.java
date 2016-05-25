@@ -52,10 +52,14 @@ public class Monopoly {
 				String caseType = data.get(i)[0];
                                 
                                 String nom = data.get(i)[2];
-                                int numero = Integer.getInteger(data.get(i)[1]);
-                                int prixAchat = Integer.getInteger(data.get(i)[5]);
-                                int prixLoyer = Integer.getInteger(data.get(i)[6]);
-                                        
+                                int numero = Integer.parseInt(data.get(i)[1]);
+                                if (caseType != "AU"){
+                                    int prixAchat = Integer.parseInt(data.get(i)[5]);
+                                    int prixLoyer = Integer.parseInt(data.get(i)[6]);
+                                } else {
+                                    int prixAchat = 0;
+                                    int prixLoyer = 0;
+                                }
          
 				if(caseType.compareTo("P") == 0){
 					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
