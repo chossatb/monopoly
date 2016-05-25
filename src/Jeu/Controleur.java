@@ -16,10 +16,10 @@ public class Controleur {
                 ((Gare) c).action(aJ,(this.de1 + this.de2));
             }
             if (c instanceof Compagnie){
-                
+                ((Compagnie) c).action(aJ,(this.de1 + this.de2));
             }
             if (c instanceof ProprieteAConstruire){
-                
+               ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2));
             }
 	}
         
@@ -46,7 +46,6 @@ public class Controleur {
 	private int lancerDes() {
                 int min = 1;
                 int max = 7;
-
                 this.setDe1((int)(Math.random() * (max-min)) + min);
                 this.setDe2((int)(Math.random() * (max-min)) + min);
                 return getDe1() + getDe2();
