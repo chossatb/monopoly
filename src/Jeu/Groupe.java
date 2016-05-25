@@ -12,4 +12,10 @@ public class Groupe {
         public String getCouleur(){
             return(this.couleur.toString());
         }
+        
+        public void setCouleur(CouleurPropriete couleur){
+            this.couleur=couleur;
+        }
+        
+        
 }

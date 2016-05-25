@@ -7,20 +7,24 @@ import javax.swing.text.Position;
 
 public class Joueur {
 	private String nomJoueur;
-	private int cash = 1500;
+	private int cash;
 	public ArrayList<Gare> gares;
         public ArrayList<Compagnie> compagnies;
         public ArrayList<ProprieteAConstruire> propietes_a_construire;
 	private Carreau positionCourante;
         
         
-        public Joueur(String nom, int cash) {
+        public Joueur(String nom) {
             nomJoueur = nom;
-            this.cash = cash;
+            this.cash = 1500;
             gares = new ArrayList<Gare>();
             compagnies = new ArrayList<Compagnie>();
             propietes_a_construire = new ArrayList<ProprieteAConstruire>();
             //this.positionCourante = new Carreau(0,
+        }
+        
+        public String getNom(){
+            return this.nomJoueur;
         }
 
 	public void payerLoyer(int aL) {

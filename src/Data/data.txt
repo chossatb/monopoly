@@ -38,4 +38,3 @@ AU,37,Chance
 P,38,Av. des Champs-Elysées,bleuFonce,350,35,175,500,1100,1300,1500,200,200
 AU,39,Taxe de Luxe,-100
 P,40,Rue de la Paix,bleuFonce,400,50,200,600,1400,1700,2000,200,200
-

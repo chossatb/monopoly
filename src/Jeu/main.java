@@ -16,6 +16,34 @@ public class main {
         
         Monopoly monopoly = new Monopoly();
         monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
+        
+        
+        Joueur j = new Joueur("Michel");
+        monopoly.creerJoueur(j);
+        
+        Joueur j1 = new Joueur("Michel1");
+        monopoly.creerJoueur(j1);
+        
+        Joueur j2 = new Joueur("Michel2");
+        monopoly.creerJoueur(j2);
+        
+        Joueur j3 = new Joueur("Michel3");
+        monopoly.creerJoueur(j3);
+        
+        Joueur j4 = new Joueur("Michel4");
+        monopoly.creerJoueur(j4);
+        
+        Joueur j5 = new Joueur("Michel5");
+        monopoly.creerJoueur(j5);
+        
+        Joueur j6 = new Joueur("Michel6");
+        monopoly.creerJoueur(j6);
+                
+        monopoly.parcourJoueurs();
+        
+        
+        
+
     
     
     }
