@@ -2,6 +2,7 @@ package Jeu;
 
 import Ui.*;
 import java.math.*;
+import java.util.HashMap;
 
 public class Controleur {
 	public IHM ihm;
@@ -19,6 +20,16 @@ public class Controleur {
                 
             }
 	}
+        
+        public void jouerPlusieursTours(HashMap<Integer, Joueur> Joueurs){
+            for(Joueur j : Joueurs.values()){
+                jouerUnCoup(j);
+                while (dbl){
+                    jouerUnCoup(j);
+                    
+                }
+        }
+        }
 
 	private Carreau lancerDesAvancer(Joueur aJ) {
 		int d = this.lancerDes();
@@ -28,15 +39,23 @@ public class Controleur {
                 return cCour;
                 
 	}
+        private int lancerlesDes(){
+                int l1 = lancerDes();
+                int l2 = lancerDes();
+                return l1 + l2;
+        }
 
 	private int lancerDes() {
                 int min = 1;
                 int max = 7;
 		int de1 = (int)(Math.random() * (max-min)) + min;
-                int de2 = (int)(Math.random() * (max-min)) + min;
-                return de1 + de2;
-
+                return de1;
 	}
+        
+//        private boolean estDouble(){
+//            lancerDes();
+//            return de1 = de2;
+//        }
 
 	private Carreau setNouveauCarreau(int aD, Carreau cCour) {
 		int num = cCour.getNumero();
