@@ -3,6 +3,7 @@ package Jeu;
 import Ui.*;
 import java.math.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Controleur {
 	private IHM ihm;
@@ -24,10 +25,15 @@ public class Controleur {
 	}
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> Joueurs){
-            for(Joueur j : Joueurs.values()){
+            for(Map.Entry<Integer, Joueur> entry : Joueurs.entrySet()){
+                Integer i = entry.getKey();
+                Joueur j = entry.getValue();
                 jouerUnCoup(j);
                 while (de1 == de2){
                     jouerUnCoup(j);
+                }
+                if (i.equals(Joueurs.size()-1)){
+                    
                 }
             }
         }
