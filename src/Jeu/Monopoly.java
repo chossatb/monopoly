@@ -81,6 +81,10 @@ public class Monopoly {
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
 			}
+                        
+                        for (HashMap.Entry<Integer, Carreau> c : carreaux.entrySet()){
+                            System.out.println(c.getValue().getNomCarreau() + c.getValue().getNomCarreau());
+                        }
 			
 		} 
 		catch(FileNotFoundException e){
