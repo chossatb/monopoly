@@ -10,6 +10,15 @@ public class Controleur {
 	private Monopoly monopoly;
         private int de1;
         private int de2;
+        
+        
+        public Controleur(IHM ihm, Monopoly monopoly) {
+            this.ihm = ihm;
+            this.monopoly = monopoly;
+            this.de1 = 0;
+            this.de2 = 0;
+        }
+        
 
 	public void jouerUnCoup(Joueur aJ) {
             Carreau c = this.lancerDesAvancer(aJ);
@@ -59,9 +68,10 @@ public class Controleur {
 
 	private Carreau setNouveauCarreau(int aD, Carreau cCour) {
 		int num = cCour.getNumero();
-                num =+ aD;
-                cCour = monopoly.getCarreau(num);
-                return cCour;
+                num = num + aD;
+                return monopoly.getCarreau(num);
+                
+                //Out of bounds exception
 	}
 
     /**

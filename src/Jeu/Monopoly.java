@@ -41,10 +41,11 @@ public class Monopoly {
 			
 			//TODO: create cases instead of displaying
                         
-                        ArrayList<Groupe> groupes = new ArrayList<Groupe>();
-                        
+                        HashMap<CouleurPropriete, Groupe> groupes = new HashMap<CouleurPropriete, Groupe>();
+
                         for (CouleurPropriete couleur : CouleurPropriete.values()){
-                            groupes.add(new Groupe(couleur));
+               
+                            groupes.put(couleur,new Groupe(couleur));
                         }
                         
                         
@@ -62,29 +63,15 @@ public class Monopoly {
                                     prixAchat = 0;
                                     prixLoyer = 0;
                                 } else {
-                                    prixAchat = Integer.parseInt(data.get(i)[5]);
-                                    prixLoyer = Integer.parseInt(data.get(i)[6]);
+                                    prixAchat = Integer.parseInt(data.get(i)[4]);
+                                    prixLoyer = Integer.parseInt(data.get(i)[5]);
                                 }
-                                
-//                                Groupe g = new Groupe(null);
-//                                
-//                                if (caseType.equals("P")){   
-//                                    g.setCouleur(CouleurPropriete.valueOf(data.get(i)[4]));
-//                                }
          
 				if(caseType.compareTo("P") == 0){
-					//System.out.println("Propriété :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        for (Groupe groupe : groupes){
-                                            if (data.get(i)[4].equals( groupe.getCouleur() )) {
-                                                carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupe));
+                                    
+                                    carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
+                                }
 
-                                            }
-                                            else {
-                                                carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, null));
-
-                                            }
-                                        }
-				}
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         carreaux.put(numero, new Gare(numero, nom, null, prixAchat, prixLoyer));
@@ -101,9 +88,9 @@ public class Monopoly {
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
 			}
                         
-                        for (HashMap.Entry<Integer, Carreau> c : carreaux.entrySet()){
-                            System.out.println(c.getValue().getNumero() + " : " + c.getValue().getNomCarreau());
-                        }
+//                        for (HashMap.Entry<Integer, Carreau> c : carreaux.entrySet()){
+//                            System.out.println(c.getValue().getNumero() + " : " + c.getValue().getNomCarreau());
+//                        }
 			
 		} 
 		catch(FileNotFoundException e){
@@ -132,12 +119,14 @@ public class Monopoly {
             if ( joueurs.size() < 6 ) {
                 joueurs.put(joueurs.size(), j);
             } else {
-                System.err.println("Error : trop de joueurs");
+                System.out.println("Error : trop de joueurs");
             }       
         }
         
         public Carreau getCarreau(int num){
+            
             return carreaux.get(num);
+            
         }
         
         public void parcourJoueurs(){

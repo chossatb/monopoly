@@ -13,8 +13,9 @@ public class main {
     
     public static void main (String[] args){
         
-        Controleur c = new Controleur();
+     
         Monopoly monopoly = new Monopoly();
+        Controleur c = new Controleur(null, monopoly); //null représente l'ihm
         monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
         
         
