@@ -24,17 +24,17 @@ public class Controleur {
             }
 	}
         
-        public void jouerPlusieursTours(HashMap<Integer, Joueur> Joueurs){
-            for(Map.Entry<Integer, Joueur> entry : Joueurs.entrySet()){
+        public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
+            for(Map.Entry<Integer, Joueur> entry : joueurs.entrySet()){        
                 Integer i = entry.getKey();
                 Joueur j = entry.getValue();
                 jouerUnCoup(j);
                 while (de1 == de2){
                     jouerUnCoup(j);
                 }
-                if (i.equals(Joueurs.size()-1)){
+                if (i.equals(joueurs.size()-1)){//si c'est le tour du dernier joueur de la hashmap
                     i = 0;
-//                    j = 
+                    j = joueurs.get(0);//recommencer au premier joueur
                 }
             }
         }
