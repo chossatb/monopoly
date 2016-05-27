@@ -68,7 +68,6 @@ public class Monopoly {
                                 }
          
 				if(caseType.compareTo("P") == 0){
-                                    
                                     carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
                                 }
 
