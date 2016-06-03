@@ -51,7 +51,13 @@ public class Compagnie extends Propriete {
     public int calculLoyer(int sommeLances) { // a changer
         Joueur j = this.getProprietaire();
         int nbCompagnies = j.getNbCompagnies();
-        return nbCompagnies*sommeLances;
+        int i = 0;
+        if (nbCompagnies == 1){
+            i = 4;
+        } else if (nbCompagnies == 2){
+            i = 10;
+        }
+        return i*sommeLances;
     }
 }
         
