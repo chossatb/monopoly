@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Monopoly {
     
@@ -121,11 +122,35 @@ public class Monopoly {
 
     
         
-        public void creerJoueur(Joueur j) {
-            if ( getJoueurs().size() < 6 ) { // au moins plus de 2 joueurs
+        public Joueur creerJoueur() {
+            Scanner sc = new Scanner(System.in);
+            String rep = sc.nextLine();
+            Joueur j = new Joueur(rep, this.getCarreau(1));
+            return j;
+        }
+        
+        public void creerJoueurs() {
+            boolean ok = false;
+            int nbj = 0;
+            
+            while (!ok){
+                Scanner sc = new Scanner(System.in);
+                System.out.print("Nombre de joueurs : ");
+                String rep = sc.nextLine();
+                nbj = Integer.parseInt(rep);
+                System.out.println("");
+                if (nbj < 2){
+                    System.out.println("Il faut au moins 2 joueurs !");
+                }else if (nbj > 6){
+                    System.out.println("Il faut au maximum 6 joueurs !");
+                }else{
+                    ok = true;
+                }
+            }
+            for (int i = 1; i <= nbj; i++){
+                System.out.print("Nom du joueur "+i+" : ");
+                Joueur j = creerJoueur();
                 getJoueurs().put(getJoueurs().size(), j);
-            } else {
-                System.out.println("Error : trop de joueurs");
             }       
         }
         
