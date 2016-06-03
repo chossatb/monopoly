@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Jeu;
+import Ui.IHM;
+import java.util.HashMap;
 
 /**
  *
@@ -13,11 +15,12 @@ public class main {
     
     public static void main (String[] args){
         
-     
+        IHM ihm = new IHM();
         Monopoly monopoly = new Monopoly();
-        Controleur c = new Controleur(null, monopoly); //null représente l'ihm
+        Controleur c = new Controleur(ihm, monopoly);
         monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
-        
+  
+
         
         Joueur j = new Joueur("Michel", monopoly.getCarreau(1));
         monopoly.creerJoueur(j);
@@ -37,16 +40,25 @@ public class main {
         Joueur j5 = new Joueur("Michel5", monopoly.getCarreau(1));
         monopoly.creerJoueur(j5);
         
-        Joueur j6 = new Joueur("Michel6", monopoly.getCarreau(1));
-        monopoly.creerJoueur(j6);
-                
-        monopoly.parcourJoueurs();
-        
-        c.jouerUnCoup(j);
+
+//                
+//        monopoly.parcourJoueurs();
         
         
+ 
+
+//        for ( HashMap.Entry<Integer, Joueur> jj : monopoly.getJoueurs().entrySet() ){
+//            System.out.println(jj.getValue().getNom() + " : " + jj.getValue().getPosCourante().getNomCarreau());
+//        }
         
-                
+        c.jouerPlusieursTours(monopoly.getJoueurs());
+        
+        
+        
+//        for ( HashMap.Entry<Integer, Joueur> jj : monopoly.getJoueurs().entrySet() ){
+//            System.out.println(jj.getValue().getNom() + " " + jj.getValue().getPosCourante().getNomCarreau());
+//        }
+                      
         
         
         

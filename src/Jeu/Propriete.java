@@ -5,6 +5,8 @@
  */
 package Jeu;
 
+import Data.Observateur;
+
 /**
  *
  * @author milleree
@@ -13,6 +15,7 @@ public abstract class Propriete extends Carreau {
     private Joueur proprietaire;
     private int prixAchat;
     private int prixLoyer;
+
     
     public Propriete (int num, String nom, Joueur proprietaire, int prixAchat, int prixLoyer){
         super(num, nom);
@@ -48,8 +51,16 @@ public abstract class Propriete extends Carreau {
     
     public abstract boolean acheterPropriete(Joueur j);
     
-    public abstract Propriete action(Joueur j, int sommeLances);
-    
+    public Propriete action(Joueur aJ, int sommeLances){
+        if (jProprio != null && jProprio != aJ) {
+                   int l = this.calculLoyer(0);
+                   aJ.payerLoyer(l);
+                   jProprio.recevoirLoyer(l);
+               }
+               return this;
+    }
+        
+    };
     
 
     

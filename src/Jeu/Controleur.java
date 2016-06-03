@@ -4,6 +4,8 @@ import Ui.*;
 import java.math.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.Iterator;
 
 public class Controleur {
 	private IHM ihm;
@@ -21,31 +23,56 @@ public class Controleur {
         
 
 	public void jouerUnCoup(Joueur aJ) {
+            
             Carreau c = this.lancerDesAvancer(aJ);
+            
+            ihm.infoJoueur(aJ, de1, de2);
+            
             if (c instanceof Gare){
                 ((Gare) c).action(aJ,(this.de1 + this.de2));
-            }
+            }       
             if (c instanceof Compagnie){
                 ((Compagnie) c).action(aJ,(this.de1 + this.de2));
             }
             if (c instanceof ProprieteAConstruire){
                ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2));
             }
+            
+
 	}
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
-            for(Map.Entry<Integer, Joueur> entry : joueurs.entrySet()){        
-                Integer i = entry.getKey();
-                Joueur j = entry.getValue();
-                jouerUnCoup(j);
-                while (de1 == de2){
+            int numJoueurGagnant=0;
+            int nbJoueurs = joueurs.size();
+            while (joueurs.size()>1) {
+                Iterator<Map.Entry<Integer,Joueur>> iter = joueurs.entrySet().iterator();
+                while (iter.hasNext()){          
+                    Map.Entry<Integer, Joueur> entry = iter.next();
+                   
+                    if (nbJoueurs == 1){
+                        numJoueurGagnant = entry.getKey();
+                        break;
+                    }
+                    Integer i = entry.getKey();
+                    Joueur j = entry.getValue();
                     jouerUnCoup(j);
-                }
-                if (i.equals(joueurs.size()-1)){//si c'est le tour du dernier joueur de la hashmap
-                    i = 0;
-                    j = joueurs.get(0);//recommencer au premier joueur
+                    if (entry.getValue().getCash() <= 0) {
+                        entry.getValue().reinitProprietes();
+                        iter.remove();
+                        nbJoueurs = nbJoueurs - 1;
+                        ihm.joueurSupprime(entry.getValue().getNom());
+                    }
+
+
+
+                    while (de1 == de2){
+                        jouerUnCoup(j);
+                    }
+                    
                 }
             }
+            
+            ihm.joueurAGagne(joueurs.get(numJoueurGagnant).getNom());
         }
 
 	private Carreau lancerDesAvancer(Joueur aJ) {
@@ -68,10 +95,13 @@ public class Controleur {
 
 	private Carreau setNouveauCarreau(int aD, Carreau cCour) {
 		int num = cCour.getNumero();
-                num = num + aD;
+                if( (num+aD)>40 ) {
+                    num = num+aD-40;
+                } else {
+                    num = num+aD;
+                }
                 return monopoly.getCarreau(num);
                 
-                //Out of bounds exception
 	}
 
     /**

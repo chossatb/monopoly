@@ -56,18 +56,23 @@ public class Monopoly {
                                 String nom = data.get(i)[2];
 
                                 int numero = Integer.parseInt(data.get(i)[1]);
-                                int prixAchat;
-                                int prixLoyer;
+                                int prixAchat=0;
+                                int prixLoyer=0;
                                 
-                                if (caseType.equals("AU") || caseType.equals("G") || caseType.equals("C") ) {
-                                    prixAchat = 0;
-                                    prixLoyer = 0;
-                                } else {
-                                    prixAchat = Integer.parseInt(data.get(i)[4]);
-                                    prixLoyer = Integer.parseInt(data.get(i)[5]);
+
+                                
+                                
+                                if (caseType.equals("G") || caseType.equals("C") ) {
+                                    prixAchat = Integer.parseInt(data.get(i)[3]);
                                 }
+                                
+                                
+                               
+                                
          
 				if(caseType.compareTo("P") == 0){
+                                    prixAchat = Integer.parseInt(data.get(i)[4]);
+                                    prixLoyer = Integer.parseInt(data.get(i)[5]);
                                     carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
                                 }
 
@@ -113,10 +118,12 @@ public class Monopoly {
 		
 		return data;
 	}
+
+    
         
         public void creerJoueur(Joueur j) {
-            if ( joueurs.size() < 6 ) {
-                joueurs.put(joueurs.size(), j);
+            if ( getJoueurs().size() < 6 ) { // au moins plus de 2 joueurs
+                getJoueurs().put(getJoueurs().size(), j);
             } else {
                 System.out.println("Error : trop de joueurs");
             }       
@@ -129,10 +136,21 @@ public class Monopoly {
         }
         
         public void parcourJoueurs(){
-            for (HashMap.Entry<Integer, Joueur> j : joueurs.entrySet()){
+            for (HashMap.Entry<Integer, Joueur> j : getJoueurs().entrySet()){
                 System.out.println(j.getValue().getNom());
             } 
         }
+
+    /**
+     * @return the joueurs
+     */
+    public HashMap<Integer, Joueur> getJoueurs() {
+        return joueurs;
+    }
+    
+    public HashMap<Integer, Carreau> getCarreaux() {
+        return carreaux;
+    }
         
         
         

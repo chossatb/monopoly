@@ -1,5 +1,7 @@
 package Jeu;
 
+import java.util.Scanner;
+
 public class ProprieteAConstruire extends Propriete{
     
     private Groupe groupe;
@@ -13,16 +15,18 @@ public class ProprieteAConstruire extends Propriete{
 
             @Override
 	public Propriete action(Joueur aJ, int sommeLances) {
+               Scanner sc = new Scanner(System.in);
                Joueur jProprio = this.getProprietaire();
                if (jProprio == null){
-                   this.acheterPropriete(aJ);   
+                   System.out.println("Argent total avant = " + aJ.getCash());
+                   System.out.println("Voulez vous acheter la propri ? (y/n)" + " (Prix = " + this.getPrixAchat());
+                   String saisie=sc.nextLine();
+                   if (saisie.equals("y")){ 
+                       this.acheterPropriete(aJ); 
+                       System.out.println("Argent total apres = " + aJ.getCash());
+                   }
                }
-               else if (jProprio != aJ) {
-                   int l = this.calculLoyer(0);
-                   aJ.payerLoyer(l);
-                   jProprio.recevoirLoyer(l);
-               }
-               return this;
+               super.action(aJ, sommeLances);
         }
     
     
@@ -47,24 +51,25 @@ public class ProprieteAConstruire extends Propriete{
 
     }
     
-            @Override
-          public int calculLoyer(int sommeLances) {
-              int l = super.getPrixLoyer();
-              Groupe g = this.getGroupe();
-              Joueur j = super.getProprietaire();
-              int nb = 0; //représente le nombre de propriétés du groupe (en fonction de la couleur) que posséde le propriétaire
-              
-              for (ProprieteAConstruire i : j.getPropietes_a_construire()){
-                  if (i.getGroupe().getCouleur().equals(this.getGroupe().getCouleur())){
-                      nb =+ 1;
-                  }
-              }
-              
-              if (nb == this.getGroupe().getNbProprietes()) {
-                  return (l * 2);
-              }
-              else{
-                  return (l);
-              }
-          }
+    @Override
+    public int calculLoyer(int sommeLances) {
+        int l = super.getPrixLoyer();
+        Groupe g = this.getGroupe();
+        Joueur j = super.getProprietaire();
+        int nb = 0; //représente le nombre de propriétés du groupe (en fonction de la couleur) que posséde le propriétaire
+
+        for (ProprieteAConstruire i : j.getPropietes_a_construire()){
+            if (i.getGroupe().getCouleur().equals(this.getGroupe().getCouleur())){
+                nb++;
+            }
+        }
+
+        if (nb == this.getGroupe().getNbProprietes()) {
+            return (l * 2);
+        }
+        else{
+            return (l);
+        }
+  }
+          
 }

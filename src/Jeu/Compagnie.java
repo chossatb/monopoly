@@ -1,5 +1,8 @@
 package Jeu;
 
+import Data.Message;
+import java.util.Scanner;
+
 public class Compagnie extends Propriete {
     
     public Compagnie (int num, String nom, Joueur proprietaire, int prixAchat, int prixLoyer){
@@ -10,9 +13,21 @@ public class Compagnie extends Propriete {
     
         @Override
 	public Propriete action(Joueur aJ, int sommeLances) {
+               Data.Message mess = new Message();
+               Scanner sc = new Scanner(System.in);
                Joueur jProprio = this.getProprietaire();
                if (jProprio == null){
-                   this.acheterPropriete(aJ);   
+                   
+                   mess.quest_achat = "Voulez vous acheter la compagnie ? (y/n) " + " (Prix = " + this.getPrixAchat();
+                   mess.type = Message.Types.ACHETER_OU_PAS;
+                   
+                   System.out.println("Argent total avant = " + aJ.getCash());
+                   System.out.println("Voulez vous acheter la compagnie ? (y/n)" + " (Prix = " + this.getPrixAchat());
+                   String saisie=sc.nextLine();
+                   if (saisie.equals("y")){ 
+                       this.acheterPropriete(aJ); 
+                       System.out.println("Argent total apres = " + aJ.getCash());
+                   }
                }
                else if (jProprio != aJ) {
                    int l = this.calculLoyer(sommeLances);
@@ -37,12 +52,11 @@ public class Compagnie extends Propriete {
     }
     
     @Override
-    public int calculLoyer(int sommeLances) {
+    public int calculLoyer(int sommeLances) { // a changer
         Joueur j = this.getProprietaire();
         int nbCompagnies = j.getNbCompagnies();
         return nbCompagnies*sommeLances;
     }
-
 }
         
  

@@ -29,11 +29,11 @@ public class Joueur {
         
 
 	public void payerLoyer(int aL) {
-            this.cash =- aL;
+            this.cash = this.cash - aL;
 	}
 
 	public void recevoirLoyer(int aL) {
-            this.cash =+ aL;
+            this.cash = this.cash + aL;
 	}
 
 	public int getCash() {
@@ -41,7 +41,7 @@ public class Joueur {
 	}
         
         public void diminuerCash(int val){
-            this.cash =- val;
+            this.cash = this.cash - val;
         }
 
 	public Carreau getPosCourante() {
@@ -77,9 +77,29 @@ public class Joueur {
     /**
      * @return the propietes_a_construire
      */
-    public ArrayList<ProprieteAConstruire> getPropietes_a_construire() {
-        return propietes_a_construire;
-    }
-        
+        public ArrayList<ProprieteAConstruire> getPropietes_a_construire() {
+            return propietes_a_construire;
+        }
+
+        public ArrayList<Gare> getGares() {
+            return gares;
+        }
+
+        public ArrayList<Compagnie> getCompagnies() {
+            return compagnies;
+        }
+
+        public void reinitProprietes(){
+            for (Gare g : this.getGares()){
+                g.setProprietaire(null);
+            }
+            for (Compagnie c : this.getCompagnies()){
+                c.setProprietaire(null);
+            }
+            for (ProprieteAConstruire p : this.getPropietes_a_construire()){
+                p.setProprietaire(null);
+            }
+            
+        }
         
 }
