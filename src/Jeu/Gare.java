@@ -11,7 +11,7 @@ public class Gare extends Propriete {
         }
 
         @Override
-	public Propriete action(Joueur aJ, int sommeLances) {
+	public void action(Joueur aJ, int sommeLances) {
                Scanner sc = new Scanner(System.in);
                Joueur jProprio = this.getProprietaire();
                if (jProprio == null){
@@ -23,12 +23,8 @@ public class Gare extends Propriete {
                        System.out.println("Argent total apres = " + aJ.getCash() );
                    }
                }
-               else if (jProprio != aJ) {
-                   int l = this.calculLoyer(0);
-                   aJ.payerLoyer(l);
-                   jProprio.recevoirLoyer(l);
-               }
-               return this;
+               super.action(aJ, sommeLances);
+  
         }
 
 	public String getNom() {

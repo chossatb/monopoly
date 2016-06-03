@@ -51,16 +51,18 @@ public abstract class Propriete extends Carreau {
     
     public abstract boolean acheterPropriete(Joueur j);
     
-    public Propriete action(Joueur aJ, int sommeLances){
+    public void action(Joueur aJ, int sommeLances){
+        Joueur jProprio = this.getProprietaire();
         if (jProprio != null && jProprio != aJ) {
                    int l = this.calculLoyer(0);
                    aJ.payerLoyer(l);
                    jProprio.recevoirLoyer(l);
-               }
-               return this;
+        }
+
+        
     }
         
-    };
+    
     
 
     

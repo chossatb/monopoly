@@ -14,7 +14,7 @@ public class ProprieteAConstruire extends Propriete{
         }
 
             @Override
-	public Propriete action(Joueur aJ, int sommeLances) {
+	public void action(Joueur aJ, int sommeLances) {
                Scanner sc = new Scanner(System.in);
                Joueur jProprio = this.getProprietaire();
                if (jProprio == null){
@@ -27,6 +27,7 @@ public class ProprieteAConstruire extends Propriete{
                    }
                }
                super.action(aJ, sommeLances);
+
         }
     
     

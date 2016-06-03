@@ -100,7 +100,7 @@ public class Controleur {
                 } else {
                     num = num+aD;
                 }
-                return monopoly.getCarreau(num);
+                return getMonopoly().getCarreau(num);
                 
 	}
 
@@ -130,6 +130,13 @@ public class Controleur {
      */
     public void setDe2(int de2) {
         this.de2 = de2;
+    }
+
+    /**
+     * @return the monopoly
+     */
+    public Monopoly getMonopoly() {
+        return monopoly;
     }
 
 

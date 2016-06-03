@@ -12,7 +12,7 @@ public class Compagnie extends Propriete {
     
     
         @Override
-	public Propriete action(Joueur aJ, int sommeLances) {
+	public void action(Joueur aJ, int sommeLances) {
                Data.Message mess = new Message();
                Scanner sc = new Scanner(System.in);
                Joueur jProprio = this.getProprietaire();
@@ -29,12 +29,8 @@ public class Compagnie extends Propriete {
                        System.out.println("Argent total apres = " + aJ.getCash());
                    }
                }
-               else if (jProprio != aJ) {
-                   int l = this.calculLoyer(sommeLances);
-                   aJ.payerLoyer(l);
-                   jProprio.recevoirLoyer(l);
-               }
-               return this;
+               super.action(aJ, sommeLances);
+
         }
     
     @Override
