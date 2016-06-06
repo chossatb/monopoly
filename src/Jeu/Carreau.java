@@ -1,5 +1,7 @@
 package Jeu;
 
+import Data.Message;
+
 
 
 public abstract class Carreau {
@@ -37,4 +39,5 @@ public abstract class Carreau {
     public void setNomCarreau(String nomCarreau) {
         this.nomCarreau = nomCarreau;
     }
+    public abstract Message action(Joueur aJ, int sommeLances, String choix);
 }

@@ -34,7 +34,16 @@ public class Controleur {
             
             Message message = new Message();
             String choix;
+            int nbdoubles = 0;
             Carreau c = this.lancerDesAvancer(aJ);
+
+            while(de1 == de2){
+                lancerDesAvancer(aJ);
+                if (nbdoubles == 2){
+                    aJ.setCarreau(monopoly.getCarreau(11));
+                }
+                nbdoubles++;
+            }
             
             getIhmJeu().infoJoueur(aJ, de1, de2); // position, cash, somme lancés etc...
             
