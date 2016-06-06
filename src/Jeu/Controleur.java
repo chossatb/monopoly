@@ -22,6 +22,7 @@ public class Controleur {
             this.monopoly = monopoly;
             this.de1 = 0;
             this.de2 = 0;
+            ihm.afficher();
         }
         
 

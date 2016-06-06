@@ -71,6 +71,10 @@ public class ProprieteAConstruire extends Propriete{
         else{
             return (l);
         }
-  }
+    }
+    
+    public void construire() {
+        
+    }
           
 }
