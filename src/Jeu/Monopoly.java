@@ -123,6 +123,8 @@ public class Monopoly {
             
         }
         
+   
+        
 
     public HashMap<Integer, Joueur> getJoueurs() {
         return joueurs;
@@ -130,6 +132,13 @@ public class Monopoly {
     
     public HashMap<Integer, Carreau> getCarreaux() {
         return carreaux;
+    }
+
+    /**
+     * @param joueurs the joueurs to set
+     */
+    public void creerJoueurs(HashMap<Integer, Joueur> joueurs) {
+        this.joueurs = joueurs;
     }
         
         

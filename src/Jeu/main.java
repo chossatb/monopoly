@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Jeu;
-import Ui.IHM;
+import Ui.*;
 
 /**
  *
@@ -14,15 +14,16 @@ public class main {
     
     public static void main (String[] args){
         
-        Monopoly monopoly = new Monopoly();
-        IHM ihm = new IHM(monopoly);
+        Controleur c = new Controleur();
+        c.getMonopoly().CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
+        IHM_CreationJoueurs ihm = new IHM_CreationJoueurs(c);
         
-        Controleur c = new Controleur(ihm, monopoly);
-        monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
+
+        
   
-        ihm.creerJoueurs();
+
        
-        c.jouerPlusieursTours(monopoly.getJoueurs());
+       // c.jouerPlusieursTours(c.getMonopoly().getJoueurs());
        
         
         

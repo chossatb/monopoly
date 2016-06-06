@@ -10,20 +10,24 @@ import java.util.Scanner;
 import java.util.Iterator;
 
 public class Controleur {
-	private IHM ihm;
+	private IHM_CreationJoueurs ihmJoueurs;
+        private IHM_Jeu ihm;
 	private Monopoly monopoly;
         private int de1;
         private int de2;
         private Observateur observateur;
         
         
-        public Controleur(IHM ihm, Monopoly monopoly) {
-            this.ihm = ihm;
-            this.monopoly = monopoly;
+        public Controleur() {
+            this.monopoly = new Monopoly();
+            this.ihmJoueurs = new IHM_CreationJoueurs(this);
+            this.ihm = new IHM_Jeu(this);
             this.de1 = 0;
             this.de2 = 0;
-            ihm.afficher();
+            ihmJoueurs.afficher();
         }
+        
+        
         
 
 	public void jouerUnCoup(Joueur aJ) {
@@ -32,12 +36,12 @@ public class Controleur {
             String choix;
             Carreau c = this.lancerDesAvancer(aJ);
             
-            ihm.infoJoueur(aJ, de1, de2); // position, cash, somme lancés etc...
+            getIhmJeu().infoJoueur(aJ, de1, de2); // position, cash, somme lancés etc...
             
             if (c instanceof Gare){
                Joueur jProprio = ((Gare) c).getProprietaire();
                if (jProprio == null){
-                   choix = ihm.choixPayer( aJ.getCash(), ((Gare) c).getPrixAchat() ); //payer ? (y/n)
+                   choix = getIhmJeu().choixPayer( aJ.getCash(), ((Gare) c).getPrixAchat() ); //payer ? (y/n)
                    message = ((Gare) c).action(aJ,(this.de1 + this.de2), choix); //si y , message.type = ACHAT, sinon message.type = PASSER
                }
                if (jProprio != null && jProprio != aJ) {
@@ -50,8 +54,8 @@ public class Controleur {
             if (c instanceof Compagnie){
                Joueur jProprio = ((Compagnie) c).getProprietaire();
                if (jProprio == null){
-                   choix = ihm.choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
-                   ihm.choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
+                   choix = getIhmJeu().choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
+                   getIhmJeu().choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
                    message = ((Compagnie) c).action(aJ,(this.de1 + this.de2), choix);
                }
                if (jProprio != null && jProprio != aJ) {
@@ -64,8 +68,8 @@ public class Controleur {
             if (c instanceof ProprieteAConstruire){
                Joueur jProprio = ((ProprieteAConstruire) c).getProprietaire();
                if (jProprio == null){
-                   choix = ihm.choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
-                   ihm.choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   choix = getIhmJeu().choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   getIhmJeu().choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
                    message = ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2), choix);
                }
                if (jProprio != null && jProprio != aJ) {
@@ -77,10 +81,10 @@ public class Controleur {
             }
                
             if (message.type == Message.Types.ACHAT_PROPRIETE) {
-                ihm.achatEffectue(aJ.getCash());
+                getIhmJeu().achatEffectue(aJ.getCash());
             }
             else if (message.type == Message.Types.PASSER) {
-                ihm.passer();
+                getIhmJeu().passer();
             }
 
       
@@ -108,7 +112,7 @@ public class Controleur {
                         entry.getValue().reinitProprietes();
                         iter.remove();
                         nbJoueurs = nbJoueurs - 1;
-                        ihm.joueurSupprime(entry.getValue().getNom());
+                        getIhmJeu().joueurSupprime(entry.getValue().getNom());
                     }
 
 
@@ -120,7 +124,7 @@ public class Controleur {
                 }
             }
             
-            ihm.joueurAGagne(joueurs.get(numJoueurGagnant).getNom());
+            getIhmJeu().joueurAGagne(joueurs.get(numJoueurGagnant).getNom());
         }
 
 	private Carreau lancerDesAvancer(Joueur aJ) {
@@ -199,6 +203,20 @@ public class Controleur {
      */
     public void setObservateur(Observateur observateur) {
         this.observateur = observateur;
+    }
+
+    /**
+     * @param monopoly the monopoly to set
+     */
+    public void setMonopoly(Monopoly monopoly) {
+        this.monopoly = monopoly;
+    }
+
+    /**
+     * @return the ihm
+     */
+    public IHM_Jeu getIhmJeu() {
+        return ihm;
     }
 
 
