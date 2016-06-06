@@ -5,6 +5,7 @@
  */
 package Jeu;
 
+import Data.Message;
 import Data.Observateur;
 
 /**
@@ -16,6 +17,7 @@ public abstract class Propriete extends Carreau {
     private int prixAchat;
     private int prixLoyer;
 
+
     
     public Propriete (int num, String nom, Joueur proprietaire, int prixAchat, int prixLoyer){
         super(num, nom);
@@ -24,9 +26,6 @@ public abstract class Propriete extends Carreau {
         this.prixLoyer = prixLoyer;
     }
 
-    /**
-     * @return the proprietaire
-     */
     public Joueur getProprietaire() {
         return proprietaire;
     }
@@ -40,9 +39,6 @@ public abstract class Propriete extends Carreau {
     }
     
 
-    /**
-     * @param proprietaire the proprietaire to set
-     */
     public void setProprietaire(Joueur proprietaire) {
         this.proprietaire = proprietaire;
     }
@@ -51,16 +47,7 @@ public abstract class Propriete extends Carreau {
     
     public abstract boolean acheterPropriete(Joueur j);
     
-    public void action(Joueur aJ, int sommeLances){
-        Joueur jProprio = this.getProprietaire();
-        if (jProprio != null && jProprio != aJ) {
-                   int l = this.calculLoyer(0);
-                   aJ.payerLoyer(l);
-                   jProprio.recevoirLoyer(l);
-        }
-
-        
-    }
+    public abstract Message action(Joueur aJ, int sommeLances, String choix);
         
     
     

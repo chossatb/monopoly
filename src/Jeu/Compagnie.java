@@ -1,7 +1,7 @@
 package Jeu;
 
 import Data.Message;
-import java.util.Scanner;
+
 
 public class Compagnie extends Propriete {
     
@@ -11,25 +11,19 @@ public class Compagnie extends Propriete {
     
     
     
-        @Override
-	public void action(Joueur aJ, int sommeLances) {
-               Data.Message mess = new Message();
-               Scanner sc = new Scanner(System.in);
-               Joueur jProprio = this.getProprietaire();
-               if (jProprio == null){
-                   
-                   mess.quest_achat = "Voulez vous acheter la compagnie ? (y/n) " + " (Prix = " + this.getPrixAchat();
-                   mess.type = Message.Types.ACHETER_OU_PAS;
-                   
-                   System.out.println("Argent total avant = " + aJ.getCash());
-                   System.out.println("Voulez vous acheter la compagnie ? (y/n)" + " (Prix = " + this.getPrixAchat());
-                   String saisie=sc.nextLine();
-                   if (saisie.equals("y")){ 
-                       this.acheterPropriete(aJ); 
-                       System.out.println("Argent total apres = " + aJ.getCash());
-                   }
-               }
-               super.action(aJ, sommeLances);
+    @Override
+	public Message action(Joueur aJ, int sommeLances, String choix) {
+            Data.Message mess = new Message();
+            if (choix.equals("y")){ 
+                this.acheterPropriete(aJ); 
+                mess.type=Message.Types.ACHAT_PROPRIETE;
+                return mess;
+            } else{
+                this.acheterPropriete(aJ); 
+                mess.type=Message.Types.PASSER;
+                return mess;
+            }
+               
 
         }
     

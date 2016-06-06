@@ -1,6 +1,7 @@
 package Ui;
 
 import Jeu.*;
+import java.util.Scanner;
 
 public class IHM {
 	public Controleur controleur;
@@ -24,5 +25,22 @@ public class IHM {
         
         public void joueurAGagne(String nom){
             System.out.println("Le joueur " + nom + " a gagné !");
+        }
+        
+        public String choixPayer(int cash,int prix){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Argent total avant = " + cash);
+            System.out.println("Voulez vous acheter la case ? (y/n)" + " (Prix = " + prix + " )");
+            String saisie=sc.nextLine();
+            return saisie;
+        }
+        
+        public void achatEffectue(int cash){
+            System.out.println("Achat effectué ! ");
+            System.out.println("Argent total apres = " + cash);
+        }
+        
+        public void passer(){
+            System.out.println("Achat refusé");
         }
 }

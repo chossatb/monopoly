@@ -1,7 +1,7 @@
 package Jeu;
 
-import java.util.Scanner;
 
+import Data.Message;
 
 
 public class Gare extends Propriete {
@@ -10,21 +10,21 @@ public class Gare extends Propriete {
             super(num, nom, proprietaire, prixAchat, prixLoyer);
         }
 
+
         @Override
-	public void action(Joueur aJ, int sommeLances) {
-               Scanner sc = new Scanner(System.in);
-               Joueur jProprio = this.getProprietaire();
-               if (jProprio == null){
-                   System.out.println("Argent total avant = " + aJ.getCash());
-                   System.out.println("Voulez vous acheter la gare ? (y/n)" + " (Prix = " + this.getPrixAchat());
-                   String saisie=sc.nextLine();
-                   if (saisie.equals("y")){ 
-                       this.acheterPropriete(aJ); 
-                       System.out.println("Argent total apres = " + aJ.getCash() );
-                   }
-               }
-               super.action(aJ, sommeLances);
-  
+	public Message action(Joueur aJ, int sommeLances, String choix) {
+            Data.Message mess = new Message();
+
+            if (choix.equals("y")){ 
+                this.acheterPropriete(aJ); 
+                mess.type=Message.Types.ACHAT_PROPRIETE;
+                return mess;
+            } else{
+                this.acheterPropriete(aJ); 
+                mess.type=Message.Types.PASSER;
+                return mess;
+            }
+               
         }
 
 	public String getNom() {

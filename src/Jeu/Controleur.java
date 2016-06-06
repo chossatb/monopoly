@@ -1,5 +1,7 @@
 package Jeu;
 
+import Data.Message;
+import Data.Observateur;
 import Ui.*;
 import java.math.*;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ public class Controleur {
 	private Monopoly monopoly;
         private int de1;
         private int de2;
+        private Observateur observateur;
         
         
         public Controleur(IHM ihm, Monopoly monopoly) {
@@ -24,24 +27,69 @@ public class Controleur {
 
 	public void jouerUnCoup(Joueur aJ) {
             
+            Message message = new Message();
+            String choix;
             Carreau c = this.lancerDesAvancer(aJ);
             
             ihm.infoJoueur(aJ, de1, de2);
             
             if (c instanceof Gare){
-                ((Gare) c).action(aJ,(this.de1 + this.de2));
-            }       
+               Joueur jProprio = ((Gare) c).getProprietaire();
+               if (jProprio == null){
+                   choix = ihm.choixPayer( aJ.getCash(), ((Gare) c).getPrixAchat() );
+                   message = ((Gare) c).action(aJ,(this.de1 + this.de2), choix);
+               }
+               if (jProprio != null && jProprio != aJ) {
+                   int l = ((Gare) c).calculLoyer(0);
+                   aJ.payerLoyer(l);
+                   jProprio.recevoirLoyer(l);
+               }
+            }   
+            
             if (c instanceof Compagnie){
-                ((Compagnie) c).action(aJ,(this.de1 + this.de2));
+               Joueur jProprio = ((Compagnie) c).getProprietaire();
+               if (jProprio == null){
+                   choix = ihm.choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
+                   ihm.choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
+                   message = ((Compagnie) c).action(aJ,(this.de1 + this.de2), choix);
+               }
+               if (jProprio != null && jProprio != aJ) {
+                   int l = ((Compagnie) c).calculLoyer(0);
+                   aJ.payerLoyer(l);
+                   jProprio.recevoirLoyer(l);
+               }
             }
+ 
             if (c instanceof ProprieteAConstruire){
-               ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2));
+               Joueur jProprio = ((ProprieteAConstruire) c).getProprietaire();
+               if (jProprio == null){
+                   choix = ihm.choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   ihm.choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   message = ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2), choix);
+               }
+               if (jProprio != null && jProprio != aJ) {
+                   int l = ((ProprieteAConstruire) c).calculLoyer(0);
+                   aJ.payerLoyer(l);
+                   jProprio.recevoirLoyer(l);
+               }
+               
             }
+               
+            if (message.type == Message.Types.ACHAT_PROPRIETE) {
+                ihm.achatEffectue(aJ.getCash());
+            }
+            else if (message.type == Message.Types.PASSER) {
+                ihm.passer();
+            }
+
+      
             
 
 	}
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
+            Message message = new Message();
+            
             int numJoueurGagnant=0;
             int nbJoueurs = joueurs.size();
             while (joueurs.size()>1) {
@@ -137,6 +185,20 @@ public class Controleur {
      */
     public Monopoly getMonopoly() {
         return monopoly;
+    }
+
+    /**
+     * @return the observateur
+     */
+    public Observateur getObservateur() {
+        return observateur;
+    }
+
+    /**
+     * @param observateur the observateur to set
+     */
+    public void setObservateur(Observateur observateur) {
+        this.observateur = observateur;
     }
 
 
