@@ -85,9 +85,23 @@ public class IHM_CreationJoueurs extends JFrame{
             this.add(pan_joueurs, BorderLayout.CENTER);
             
             
+            JPanel pan_but = new JPanel(new GridLayout());    
+            
         //Boutton Valider
             JButton but_valider = new JButton("Valider");
-            this.add(but_valider, BorderLayout.SOUTH);
+            pan_but.add(but_valider);
+            
+            
+        //Bouton quitter
+            JButton but_Quitter = new JButton("Quitter");
+            pan_but.add(but_Quitter);
+            
+            this.add(pan_but, BorderLayout.SOUTH);
+            
+        //Détection clic quitter : 
+            but_Quitter.addActionListener((ActionEvent e) -> {
+                System.exit(0);
+            });
             
         //Détection clic valider :
             but_valider.addActionListener((ActionEvent e) -> {
