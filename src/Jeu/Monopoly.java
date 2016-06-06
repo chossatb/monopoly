@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Monopoly {
     
@@ -93,9 +92,6 @@ public class Monopoly {
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
 			}
                         
-//                        for (HashMap.Entry<Integer, Carreau> c : carreaux.entrySet()){
-//                            System.out.println(c.getValue().getNumero() + " : " + c.getValue().getNomCarreau());
-//                        }
 			
 		} 
 		catch(FileNotFoundException e){
@@ -120,39 +116,6 @@ public class Monopoly {
 		return data;
 	}
 
-    
-        
-        public Joueur creerJoueur() {
-            Scanner sc = new Scanner(System.in);
-            String rep = sc.nextLine();
-            Joueur j = new Joueur(rep, this.getCarreau(1));
-            return j;
-        }
-        
-        public void creerJoueurs() {
-            boolean ok = false;
-            int nbj = 0;
-            
-            while (!ok){
-                Scanner sc = new Scanner(System.in);
-                System.out.print("Nombre de joueurs : ");
-                String rep = sc.nextLine();
-                nbj = Integer.parseInt(rep);
-                System.out.println("");
-                if (nbj < 2){
-                    System.out.println("Il faut au moins 2 joueurs !");
-                }else if (nbj > 6){
-                    System.out.println("Il faut au maximum 6 joueurs !");
-                }else{
-                    ok = true;
-                }
-            }
-            for (int i = 1; i <= nbj; i++){
-                System.out.print("Nom du joueur "+i+" : ");
-                Joueur j = creerJoueur();
-                getJoueurs().put(getJoueurs().size(), j);
-            }       
-        }
         
         public Carreau getCarreau(int num){
             
@@ -160,15 +123,7 @@ public class Monopoly {
             
         }
         
-        public void parcourJoueurs(){
-            for (HashMap.Entry<Integer, Joueur> j : getJoueurs().entrySet()){
-                System.out.println(j.getValue().getNom());
-            } 
-        }
 
-    /**
-     * @return the joueurs
-     */
     public HashMap<Integer, Joueur> getJoueurs() {
         return joueurs;
     }

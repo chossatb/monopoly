@@ -7,8 +7,8 @@ public class IHM {
 	public Controleur controleur;
         
         
-        public IHM(){
-            this.controleur= new Controleur(this, null);
+        public IHM(Monopoly monopoly){
+            this.controleur= new Controleur(this, monopoly);
         }
 
 	public void afficher() {
@@ -43,4 +43,38 @@ public class IHM {
         public void passer(){
             System.out.println("Achat refusé");
         }
+        
+        public Joueur creerJoueur() {
+            Scanner sc = new Scanner(System.in);
+            String rep = sc.nextLine();
+            Joueur j = new Joueur(rep, controleur.getMonopoly().getCarreau(1));
+            return j;
+        }
+        
+        public void creerJoueurs() {
+            boolean ok = false;
+            int nbj = 0;
+            
+            while (!ok){
+                Scanner sc = new Scanner(System.in);
+                System.out.print("Nombre de joueurs : ");
+                String rep = sc.nextLine();
+                nbj = Integer.parseInt(rep);
+                System.out.println("");
+                if (nbj < 2){
+                    System.out.println("Il faut au moins 2 joueurs !");
+                }else if (nbj > 6){
+                    System.out.println("Il faut au maximum 6 joueurs !");
+                }else{
+                    ok = true;
+                }
+            }
+            for (int i = 1; i <= nbj; i++){
+                System.out.print("Nom du joueur "+i+" : ");
+                Joueur j = creerJoueur();
+                controleur.getMonopoly().getJoueurs().put(controleur.getMonopoly().getJoueurs().size(), j);
+            }       
+        }
+        
+        
 }

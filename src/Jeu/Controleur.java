@@ -31,13 +31,13 @@ public class Controleur {
             String choix;
             Carreau c = this.lancerDesAvancer(aJ);
             
-            ihm.infoJoueur(aJ, de1, de2);
+            ihm.infoJoueur(aJ, de1, de2); // position, cash, somme lancés etc...
             
             if (c instanceof Gare){
                Joueur jProprio = ((Gare) c).getProprietaire();
                if (jProprio == null){
-                   choix = ihm.choixPayer( aJ.getCash(), ((Gare) c).getPrixAchat() );
-                   message = ((Gare) c).action(aJ,(this.de1 + this.de2), choix);
+                   choix = ihm.choixPayer( aJ.getCash(), ((Gare) c).getPrixAchat() ); //payer ? (y/n)
+                   message = ((Gare) c).action(aJ,(this.de1 + this.de2), choix); //si y , message.type = ACHAT, sinon message.type = PASSER
                }
                if (jProprio != null && jProprio != aJ) {
                    int l = ((Gare) c).calculLoyer(0);
@@ -88,7 +88,6 @@ public class Controleur {
 	}
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
-            Message message = new Message();
             
             int numJoueurGagnant=0;
             int nbJoueurs = joueurs.size();

@@ -5,7 +5,6 @@
  */
 package Jeu;
 import Ui.IHM;
-import java.util.HashMap;
 
 /**
  *
@@ -15,14 +14,13 @@ public class main {
     
     public static void main (String[] args){
         
-        IHM ihm = new IHM();
         Monopoly monopoly = new Monopoly();
+        IHM ihm = new IHM(monopoly);
+        
         Controleur c = new Controleur(ihm, monopoly);
         monopoly.CreerPlateau("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Data/data.txt");
   
-        monopoly.creerJoueurs();// faire IHM exte de creerJoueur / creerJoueurs
-        
-        
+        ihm.creerJoueurs();
        
         c.jouerPlusieursTours(monopoly.getJoueurs());
        
