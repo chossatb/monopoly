@@ -23,14 +23,14 @@ public class AutreCarreau extends Carreau{
         }
     }
     
-    public void tirerUneCarte(Joueur j, String dataFilename){
+    /*public void tirerUneCarte(Joueur j, String dataFilename){
         ArrayList<String[]> data = readDataFile(dataFilename, ",");//erreur read datafile
         for(int i=0; i<data.size(); ++i){
                 if (j.getPosCourante().getNomCarreau() == "Chance" || j.getPosCourante().getNomCarreau() == "Caisse de communauté"){
                     
                 }
         }
-    }
+    }*/
     
     
 }
