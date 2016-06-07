@@ -7,6 +7,7 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -15,8 +16,7 @@ import javax.swing.border.TitledBorder;
 public class IHM_Jeu extends JFrame{
 	private Controleur controleur;
         
-        private JButton but_LancerDes;
-        private JButton but_FinTour;
+
         private JButton but_Demarrer;
         private JButton but_Quitter;
         
@@ -30,6 +30,9 @@ public class IHM_Jeu extends JFrame{
         
         private JLabel lab_imageDe1;
         private JLabel lab_imageDe2;
+        private JLabel[] tab_caseActuelle;
+        private JLabel[] tab_argent;
+        private TitledBorder[] tab_nomJ;
         
         private ImageIcon[] images;
         
@@ -44,7 +47,7 @@ public class IHM_Jeu extends JFrame{
             initUiComponents(); 
             setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.setTitle("Monopoly");
-            setSize(1100, 900);
+            setSize(1500, 750);
             setVisible(true);                        
         }
         
@@ -56,20 +59,16 @@ public class IHM_Jeu extends JFrame{
             
             pan_center = new JPanel();
             pan_east = new JPanel();
-             joueurs = controleur.getMonopoly().getJoueurs();
+            joueurs = controleur.getMonopoly().getJoueurs();
             
             // Boutons
-                but_LancerDes = new JButton("Lancer dés");
-                but_LancerDes.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_LancerDes.getMinimumSize().height+10));
-                but_LancerDes.addActionListener((ActionEvent e) -> {
-                    controleur.jouerUnCoup(controleur.getMonopoly().getJoueurs().get(1)); //a modifier
-                });
 
-                but_FinTour = new JButton("Fin du tour");
-                but_FinTour.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_FinTour.getMinimumSize().height+10));
 
                 but_Demarrer = new JButton("Démarrer");
                 but_Demarrer.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_Demarrer.getMinimumSize().height+10));
+                but_Demarrer.addActionListener((ActionEvent e) -> {
+                    controleur.jouerPlusieursTours(joueurs);
+                });
 
                 but_Quitter = new JButton("Quitter");
                 but_Quitter.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_Quitter.getMinimumSize().height+10));
@@ -116,8 +115,7 @@ public class IHM_Jeu extends JFrame{
                 pan_EC.setLayout(new BoxLayout(pan_EC, BoxLayout.PAGE_AXIS));
                 pan_EC.setBackground(Color.LIGHT_GRAY);
 
-                pan_EC.add(but_LancerDes);
-                pan_EC.add(but_FinTour);
+
 
                 pan_east.setBackground(Color.LIGHT_GRAY);
                 pan_east.setPreferredSize(new Dimension(170, 1000));
@@ -138,35 +136,59 @@ public class IHM_Jeu extends JFrame{
             
             //CENTER//////////////////////////////////////////////////
                 pan_CN = new JPanel();
-                pan_CN.setLayout(new GridLayout(2,2));
+                pan_CN.setLayout(new GridLayout(6,1));
 
                  pan_CN.setBorder(new TitledBorder(new LineBorder(Color.black, 3),"Informations sur les joueurs:"));
+                 
+                 pan_CN.setPreferredSize(new Dimension(600, 700));
+                 
+                 tab_argent = new JLabel[controleur.getMonopoly().getJoueurs().size()];
+                 tab_caseActuelle = new JLabel[controleur.getMonopoly().getJoueurs().size()];
+                 tab_nomJ = new TitledBorder[controleur.getMonopoly().getJoueurs().size()];
+                 
+                 //Initialisation des Labels info_joueurs
+                 for (int i = 0 ; i < controleur.getMonopoly().getJoueurs().size(); i++){
+                     tab_argent[i] = new JLabel();
+                     tab_caseActuelle[i] = new JLabel();
+                     tab_nomJ[i] = new TitledBorder(new LineBorder(Color.GRAY, 1));
+                     pan_joueur = new JPanel(new GridLayout(2,1));
+                     pan_joueur.setBorder(tab_nomJ[i]);
+                     pan_joueur.add(new JLabel("Case actuelle : "));
+                     pan_joueur.add(tab_caseActuelle[i]);
+                     pan_joueur.add(new JLabel("Argent : "));
+                     pan_joueur.add(tab_argent[i]);
+                     pan_CN.add(pan_joueur);
+                 }
+                 
+                 
+                 
+                 //Affectation des Labels en fonction des informations des joueurs (uniquement pour le premier affichage de l'interface).
+                 int i =0;
+                 for (HashMap.Entry<Integer,Joueur> e : joueurs.entrySet()) {
+                     if (e.getValue().getNom().equals(joueurCourant.getNom())){
+                        tab_nomJ[i].setTitleColor(Color.red);
+                     } else{
+                        tab_nomJ[i].setTitleColor(Color.gray);
+                     }
+                     tab_nomJ[i].setTitle(e.getValue().getNom());
+                     tab_caseActuelle[i].setText(e.getValue().getPosCourante().getNomCarreau() + "(" + e.getValue().getPosCourante().getNumero() + ")");
+                     tab_argent[i].setText(Integer.toString(e.getValue().getCash()));
+                     i++;
+                 }
 
-                //Panel joueurs :
-                for (HashMap.Entry<Integer,Joueur> e : joueurs.entrySet()) {
-                    pan_joueur = new JPanel(new GridLayout(2,1));
-                    pan_joueur.setBorder(new TitledBorder(new LineBorder(Color.RED, 1),e.getValue().getNom()));
-                    pan_joueur.setBorder(new TitledBorder(new LineBorder(Color.GRAY, 1),e.getValue().getNom()));
-                    pan_joueur.add(new JLabel("Case actuelle : "));
-                    pan_joueur.add( new JLabel ( e.getValue().getPosCourante().getNomCarreau() + "(" + e.getValue().getPosCourante().getNumero() + ")" ));
-                    pan_joueur.add(new JLabel("Argent : "));
-                    pan_joueur.add(new JLabel(Integer.toString(e.getValue().getCash())));
-                    pan_CN.add(pan_joueur);
-                }
 
-
-                this.pan_center.add(pan_CN, BorderLayout.NORTH);
-                this.pan_center.add( lab_image, BorderLayout.SOUTH);
+                this.pan_center.add(pan_CN, BorderLayout.WEST);
+                this.pan_center.add( lab_image, BorderLayout.EAST);
 
                 this.add(pan_center, BorderLayout.CENTER);
 
         }
         
         
-        public void display(Controleur controleur){
+        public void display(Controleur c){
             
         // Gestion des dés
-            switch (controleur.getDe1()){ //de1
+            switch (c.getDe1()){ //de1
                     case 0:
                         lab_imageDe1.setIcon(images[0]);  
                         break;
@@ -191,7 +213,7 @@ public class IHM_Jeu extends JFrame{
             };
 
         
-            switch (controleur.getDe2()){ //de2
+            switch (c.getDe2()){ //de2
                     case 0:
                         lab_imageDe2.setIcon(images[0]);  
                         break;
@@ -217,32 +239,32 @@ public class IHM_Jeu extends JFrame{
             
             
         //MAJ Panel Joueurs
-            pan_CN.removeAll();
-            pan_joueur.removeAll();
-            for (HashMap.Entry<Integer,Joueur> e : joueurs.entrySet()) {
-                    pan_joueur = new JPanel(new GridLayout(2,1));
-                    if (e==joueurCourant){
-                        pan_joueur.setBorder(new TitledBorder(new LineBorder(Color.RED, 1),e.getValue().getNom()));
-                    } else{
-                        pan_joueur.setBorder(new TitledBorder(new LineBorder(Color.GRAY, 1),e.getValue().getNom()));
-                    }
-                    pan_joueur.add(new JLabel("Case actuelle : "));
-                    pan_joueur.add( new JLabel ( e.getValue().getPosCourante().getNomCarreau() + "(" + e.getValue().getPosCourante().getNumero() + ")" ));
-                    pan_joueur.add(new JLabel("Argent : "));
-                    pan_joueur.add(new JLabel(Integer.toString(e.getValue().getCash())));
-                    pan_CN.add(pan_joueur);
-            }         
-            pan_joueur.repaint();
-
+            int i =0;
             
-
-
+                joueurs.remove(joueurs);
             
+                 for (HashMap.Entry<Integer,Joueur> e : c.getMonopoly().getJoueurs().entrySet()) {
+                     
+                     if (e.getValue().getNom().equals(joueurCourant.getNom())){
+                        tab_nomJ[i].setTitleColor(Color.red);
+                     } else{
+                        tab_nomJ[i].setTitleColor(Color.gray);
+                     }
+                     tab_caseActuelle[i].setText(e.getValue().getPosCourante().getNomCarreau() + "(" + e.getValue().getPosCourante().getNumero() + ")");
+                     tab_argent[i].setText(Integer.toString(e.getValue().getCash()));
+                     i++;
+                 }
+                 
+                 joueurs.putAll(c.getMonopoly().getJoueurs());
+                 
+                 pan_CN.repaint();
+                 
+
+    
         }
         
         
 
-        
         
         public void infoJoueur(Joueur aJ, Controleur c){
             joueurCourant = aJ;
@@ -250,11 +272,14 @@ public class IHM_Jeu extends JFrame{
             //System.out.println("Position = " + aJ.getPosCourante().getNumero() + " " + de1 + "et" + de2 + " : " + aJ.getNom() + " - >  " + aJ.getPosCourante().getNomCarreau());
         }
         
-        public void joueurSupprime(String nom){
+        public void joueurSupprime(String nom){ 
+            JOptionPane.showMessageDialog(this, "Le joueur " + nom + " a perdu.");    
             System.err.println("Le joueur " + nom + " supprimé !");
         }
         
         public void joueurAGagne(String nom){
+            but_Demarrer.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "Le joueur " + nom + " a gagné.");
             System.out.println("Le joueur " + nom + " a gagné !");
         }
         
@@ -272,21 +297,12 @@ public class IHM_Jeu extends JFrame{
         public void achatEffectue(int cash, Controleur c){
             JOptionPane.showMessageDialog(this, "Achat effectué.\n" + "Argent total apres = " + cash);
             this.display(c);
-//            System.out.println("Achat effectué ! ");
-//            System.out.println("Argent total apres = " + cash);
         }
         
         public void passer(){
             JOptionPane.showMessageDialog(this, "Achat refusé.");
-            //System.out.println("Achat refusé");
         }
-        
-        public Joueur creerJoueur() {
-            Scanner sc = new Scanner(System.in);
-            String rep = sc.nextLine();
-            Joueur j = new Joueur(rep, controleur.getMonopoly().getCarreau(1));
-            return j;
-        }
+
         
 
         

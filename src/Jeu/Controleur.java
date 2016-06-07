@@ -3,6 +3,8 @@ package Jeu;
 import Data.Message;
 import Data.Observateur;
 import Ui.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +38,9 @@ public class Controleur {
             String choix;
             int nbdoubles = 0;
             Carreau c = this.lancerDesAvancer(aJ);
-
+            
+            
+            
             while(de1 == de2){
                 lancerDesAvancer(aJ);
                 if (nbdoubles == 2){
@@ -135,12 +139,16 @@ public class Controleur {
         }
 
 	private Carreau lancerDesAvancer(Joueur aJ) {
-		int d = this.lancerDes();
+
+                       int d = lancerDes();
+
+                
                 Carreau cCour = aJ.getPosCourante();
                 cCour = setNouveauCarreau(d, cCour);
                 aJ.setCarreau(cCour);
                 return cCour;
-                
+            
+            
 	}
         
 
