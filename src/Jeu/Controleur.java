@@ -36,12 +36,12 @@ public class Controleur {
             String choix;
             Carreau c = this.lancerDesAvancer(aJ);
             
-            getIhmJeu().infoJoueur(aJ, de1, de2); // position, cash, somme lancés etc...
+            getIhmJeu().infoJoueur(aJ, this); // position, cash, somme lancés etc...
             
             if (c instanceof Gare){
                Joueur jProprio = ((Gare) c).getProprietaire();
                if (jProprio == null){
-                   choix = getIhmJeu().choixPayer( aJ.getCash(), ((Gare) c).getPrixAchat() ); //payer ? (y/n)
+                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((Gare) c).getPrixAchat() ); //payer ? (y/n)
                    message = ((Gare) c).action(aJ,(this.de1 + this.de2), choix); //si y , message.type = ACHAT, sinon message.type = PASSER
                }
                if (jProprio != null && jProprio != aJ) {
@@ -54,8 +54,7 @@ public class Controleur {
             if (c instanceof Compagnie){
                Joueur jProprio = ((Compagnie) c).getProprietaire();
                if (jProprio == null){
-                   choix = getIhmJeu().choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
-                   getIhmJeu().choixPayer( aJ.getCash(), ((Compagnie) c).getPrixAchat() );
+                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((Compagnie) c).getPrixAchat() );
                    message = ((Compagnie) c).action(aJ,(this.de1 + this.de2), choix);
                }
                if (jProprio != null && jProprio != aJ) {
@@ -68,8 +67,7 @@ public class Controleur {
             if (c instanceof ProprieteAConstruire){
                Joueur jProprio = ((ProprieteAConstruire) c).getProprietaire();
                if (jProprio == null){
-                   choix = getIhmJeu().choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
-                   getIhmJeu().choixPayer( aJ.getCash(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
                    message = ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2), choix);
                }
                if (jProprio != null && jProprio != aJ) {
@@ -81,7 +79,7 @@ public class Controleur {
             }
                
             if (message.type == Message.Types.ACHAT_PROPRIETE) {
-                getIhmJeu().achatEffectue(aJ.getCash());
+                getIhmJeu().achatEffectue(aJ.getCash(), this);
             }
             else if (message.type == Message.Types.PASSER) {
                 getIhmJeu().passer();
