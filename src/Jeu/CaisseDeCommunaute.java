@@ -29,7 +29,28 @@ public class CaisseDeCommunaute extends AutreCarreau {
     @Override
     public Message action(Joueur aJ, int sommeLances, String choix){
         Message mess = new Message();
-        
-        return null;
+        switch (carte.getType()){
+                    case "AM":
+                        aJ.diminuerCash(carte.getPrix());
+                        mess.type = Message.Types.CARTE_AMENDE; 
+                        break;
+                    case "PR":
+                        //aJ.setCarreau();
+                        aJ.allerEnPrison();
+                        mess.type = Message.Types.CARTE_ALLEZ_PRISON;
+                        break;
+                    case "DE":
+                        mess.type = Message.Types.CARTE_DEPLACEMENT;  
+                        break;
+                    case "LI":
+                        //aJ.carteLiberePrison();
+                        mess.type = Message.Types.CARTE_LIBERE_PRISON;
+                        break;
+                    case "GA":
+                        aJ.encaisserGain(carte.getPrix());
+                        mess.type = Message.Types.CARTE_GAIN;
+                        break;
+            };
+            return mess;
     }
 }

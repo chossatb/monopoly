@@ -19,7 +19,11 @@ public class Message {
         PASSER,
         CARTE_AMENDE,
         CARTE_DEPLACEMENT,
-        CARTE_MAISON_HOTEL
+        CARTE_MAISON_HOTEL,
+        CARTE_GAIN,
+        CARTE_ALLEZ_PRISON,
+        CARTE_LIBERE_PRISON,
+        CARTE_RECULER
     };
     
     public Types type;
