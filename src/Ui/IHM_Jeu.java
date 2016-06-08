@@ -294,6 +294,18 @@ public class IHM_Jeu extends JFrame{
 
         }
         
+        public String choixMaison(Carreau carreau,int prix){  
+            int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter une maison ? (Prix = " + prix + ")","Achat",JOptionPane.YES_NO_OPTION);
+            if (n == 0){
+                String nom = JOptionPane.showInputDialog(this, "Combien voulez vous acheter de maison ?", "Gendarmerie nationale !", JOptionPane.QUESTION_MESSAGE);
+                return "y";
+            }
+            else {
+                return "n";
+            }
+
+        }
+        
         public void achatEffectue(int cash, Controleur c){
             JOptionPane.showMessageDialog(this, "Achat effectué.\n" + "Argent total apres = " + cash);
             this.display(c);

@@ -60,12 +60,12 @@ public class Monopoly {
 
                                 int numero = Integer.parseInt(data.get(i)[1]);
                                 int prixAchat=0;
-                                int prixLoyer_nu=0;
-                                int prixLoyer_1_maison=0;
-                                int prixLoyer_2_maisons=0;
-                                int prixLoyer_3_maisons=0;
-                                int prixLoyer_4_maisons=0;
-                                int prixLoyer_1_hotel=0;
+                                int tab_prixLoyer[];
+                                
+                                tab_prixLoyer = new int[6]; //Pour calculer le loyer des proprietes
+                                
+                                int prixLoyer = 0; //Pour calculer le loyer des compagnies et des gares
+                                
                                 
 
                                 
@@ -80,22 +80,24 @@ public class Monopoly {
          
 				if(caseType.compareTo("P") == 0){
                                     prixAchat = Integer.parseInt(data.get(i)[4]);
-                                    prixLoyer_nu = Integer.parseInt(data.get(i)[5]);
-                                    prixLoyer_1_maison = Integer.parseInt(data.get(i)[6]);
-                                    prixLoyer_2_maisons = Integer.parseInt(data.get(i)[7]);
-                                    prixLoyer_3_maisons = Integer.parseInt(data.get(i)[8]);
-                                    prixLoyer_4_maisons = Integer.parseInt(data.get(i)[9]);
-                                    prixLoyer_1_hotel = Integer.parseInt(data.get(i)[10]);
-                                    carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer_nu, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
+                                    tab_prixLoyer[0] = Integer.parseInt(data.get(i)[5]);
+                                    tab_prixLoyer[1] = Integer.parseInt(data.get(i)[6]);
+                                    tab_prixLoyer[2] = Integer.parseInt(data.get(i)[7]);
+                                    tab_prixLoyer[3] = Integer.parseInt(data.get(i)[8]);
+                                    tab_prixLoyer[4] = Integer.parseInt(data.get(i)[9]);
+                                    tab_prixLoyer[5] = Integer.parseInt(data.get(i)[10]);
+                                    carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, tab_prixLoyer, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
                                 }
 
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(numero, new Gare(numero, nom, null, prixAchat, prixLoyer_nu));
+                                        prixLoyer = 0;
+                                        carreaux.put(numero, new Gare(numero, nom, null, prixAchat, prixLoyer));
 				}
 				else if(caseType.compareTo("C") == 0){
 					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(numero, new Compagnie(numero, nom, null, prixAchat, prixLoyer_nu));
+                                        prixLoyer = 0;
+                                        carreaux.put(numero, new Compagnie(numero, nom, null, prixAchat, prixLoyer));
 				}
 				else if(caseType.compareTo("AU") == 0){
                                     if(nom.compareTo("Départ") == 0){

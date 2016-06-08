@@ -16,6 +16,7 @@ public abstract class Propriete extends Carreau {
     private Joueur proprietaire;
     private int prixAchat;
     private int prixLoyer;
+    
 
 
     
@@ -48,6 +49,13 @@ public abstract class Propriete extends Carreau {
     public abstract boolean acheterPropriete(Joueur j);
     
     public abstract Message action(Joueur aJ, int sommeLances, String choix);
+
+    /**
+     * @param prixLoyer the prixLoyer to set
+     */
+    public void setPrixLoyer(int prixLoyer) {
+        this.prixLoyer = prixLoyer;
+    }
         
     
     

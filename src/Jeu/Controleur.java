@@ -83,10 +83,15 @@ public class Controleur {
                    choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
                    message = ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2), choix);
                }
-               if (jProprio != null && jProprio != aJ) {
+               
+               if (jProprio != null && !jProprio.getNom().equals(aJ.getNom())) {
                    int l = ((ProprieteAConstruire) c).calculLoyer(0);
                    aJ.payerLoyer(l);
                    jProprio.recevoirLoyer(l);
+               }
+               
+               if (jProprio.getNom().equals(aJ.getNom())){
+                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
                }
                
             }
