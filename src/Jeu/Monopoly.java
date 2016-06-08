@@ -24,10 +24,12 @@ public class Monopoly {
     
         private HashMap<Integer, Carreau> carreaux;
         private HashMap<Integer, Joueur> joueurs;
+        private HashMap<Integer, CartesChance> carteschance;
     
         public Monopoly(){
             this.carreaux = new HashMap<Integer, Carreau>();
             this.joueurs =  new HashMap<Integer, Joueur>();
+            this.carteschance = new HashMap<Integer, CartesChance>();
         }
     
 	public void CreerPlateau(String dataFilename){ //type de retour à vérifier
@@ -38,6 +40,7 @@ public class Monopoly {
 	{
 		try{
 			ArrayList<String[]> data = readDataFile(dataFilename, ",");
+			ArrayList<String[]> chance = readDataFile(dataFilename, ",");
 			
 			//TODO: create cases instead of displaying
                         
@@ -95,20 +98,61 @@ public class Monopoly {
                                         carreaux.put(numero, new Compagnie(numero, nom, null, prixAchat, prixLoyer_nu));
 				}
 				else if(caseType.compareTo("AU") == 0){
-                                    // if(nom.compareTo("Caisse de Communauté") == 0){
-                                        //carreaux.put(numero, new CaisseDeCommunaute(numero,nom);
-                                    //}
-                                    //else if(nom.compareTo("Départ") == 0){
-                                        //carreaux.put(numero, new Depart(numero,nom);
-                                    //}else if(nom.compareTo("Impôt sur le revenu") == 0){
-                                        //carreaux.put(numero, new Impots(numero,nom);
-                                    //}
+                                    if(nom.compareTo("Départ") == 0){
+                                        carreaux.put(numero, new Depart(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Caisse de Communauté") == 0){
+                                        carreaux.put(numero, new CaisseDeCommunaute(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Impôt sur le revenu") == 0){
+                                        carreaux.put(numero, new Impots(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Chance") == 0){
+                                        carreaux.put(numero, new Chance(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Simple Visite / En Prison") == 0){
+                                        carreaux.put(numero, new Prison(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Parc Gratuit") == 0){
+                                        carreaux.put(numero, new ParcGratuit(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Allez en prison") == 0){
+                                        carreaux.put(numero, new AllezEnPrison(numero,nom));
+                                    }
+                                    else if(nom.compareTo("Taxe de Luxe") == 0){
+                                        carreaux.put(numero, new TaxeDeLuxe(numero,nom));
+                                    }
+                                    
 					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(numero, new AutreCarreau(numero, nom));
+//                                        carreaux.put(numero, new AutreCarreau(numero, nom));
 				}
 				else
 					System.err.println("[buildGamePleateau()] : Invalid Data type");
 			}
+                        for(int i = 0; i<chance.size(); ++i){
+                            
+                            String caseType = data.get(i)[0];
+                            String nom = data.get(i)[2];
+                            int numero = Integer.parseInt(data.get(i)[1]);
+                            if (caseType.compareTo("AM") == 0) {
+                                int prixAmende = Integer.parseInt(data.get(i)[3]);
+                                carteschance.put(numero, new CartesChance(nom, numero, caseType, prixAmende));
+                            }
+                            else if (caseType.compareTo("GA") == 0) {
+                                int prixGain = Integer.parseInt(data.get(i)[3]);
+                                carteschance.put(numero, new CartesChance(nom, numero, caseType, prixGain));
+                            }
+                            else if(caseType.compareTo("MH") == 0){
+                                int prixParMaison = Integer.parseInt(data.get(i)[4]);
+                                carteschance.put(numero, new CartesChance(nom, numero, caseType, prixParMaison, prixParMaison));
+                            }
+                            else if(caseType.compareTo("DE") == 0 || caseType.compareTo("LI") == 0 || caseType.compareTo("PR") == 0 ||caseType.compareTo("RE") == 0){
+                                carteschance.put(numero, new CartesChance(nom, numero, caseType));
+                            }
+                            else{
+                                System.err.println("[buildGamePleateau()] : Invalid Data type");
+                            }
+                        }
                         
 			
 		} 

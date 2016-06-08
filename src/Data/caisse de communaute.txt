@@ -1,0 +1,16 @@
+LI,1,Vous êtes libéré de prison,0,0,0
+AM,2,Payez une amende,-10,0,0
+HB,3,C'est votre anniversaire,10,0,0
+GA,4,Erreur de la banque en votre faveur,200,0,0
+DE,5,Retournez à Belleville,0,0,0
+AM,6,Payez la note du médecin,-50,0,0
+GA,7,Les contributions vous remboursent,20,0,0
+AM,8,Payer à l'hôpital,-100,0,0
+GA,9,Vous héritez,100,0,0
+PR,10,Allez en prison,0,0,0
+AM,11,Payer votre police d'assurance,-50,0,0
+GA,12,La vente de votre stock vous rapporte,50,0,0
+DE,13,Avancez jusqu'à la case départ,0,0,0
+GA,14,Recevez votre intérêt sur l'emprunt à 7%,25,0,0
+GA,15,Recevez votre revenu annuel,100,0,0
+GA,16,Vous avez gagné le 2e prix de beauté,10,0,0
