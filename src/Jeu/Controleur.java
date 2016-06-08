@@ -49,7 +49,8 @@ public class Controleur {
                 nbdoubles++;
             }
             
-            getIhmJeu().infoJoueur(aJ, this); // position, cash, somme lancés etc...
+            this.etatPartie("Info", aJ, c);
+//            getIhmJeu().infoJoueur(aJ, this); // position, cash, somme lancés etc...
             
             if (c instanceof Gare){
                Joueur jProprio = ((Gare) c).getProprietaire();
@@ -109,6 +110,23 @@ public class Controleur {
             
 
 	}
+        
+        public String etatPartie(String etat, Joueur aJ, Carreau c){
+            switch(etat){
+                case "Info":
+                        this.getIhmJeu().infoJoueur(aJ, this); 
+                    break;
+                case "ChoixPayer":
+                        this.choixPayer( aJ.getPosCourante(), c.getPrixAchat() );
+                    break;
+                case "ChoixMaison":
+                    break;  
+                case "AchatEffectue":
+                    break;
+                case "passer":
+                    break; 
+            }
+        }
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
             
