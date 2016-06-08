@@ -31,6 +31,7 @@ public class Message {
     public String quest_achat;
     public String achat;
     public String passer;
+    public String deplacement;
     
     
 }

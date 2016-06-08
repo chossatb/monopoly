@@ -35,12 +35,11 @@ public class Chance extends AutreCarreau {
                         mess.type = Message.Types.CARTE_AMENDE; 
                         break;
                     case "PR":
-                        //aJ.setCarreau();
-                        aJ.allerEnPrison();
                         mess.type = Message.Types.CARTE_ALLEZ_PRISON;  
                         break;
                     case "DE":
                         mess.type = Message.Types.CARTE_DEPLACEMENT;  
+                        mess.deplacement = carte.getNom();
                         break;
                     case "LI":
                         //aJ.carteLiberePrison();

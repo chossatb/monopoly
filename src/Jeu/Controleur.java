@@ -106,13 +106,19 @@ public class Controleur {
                 message = ((CaisseDeCommunaute) c).action(aJ, nbdoubles, choix);
             }
                
-            if (message.type == Message.Types.ACHAT_PROPRIETE) {
-                this.etatPartie("AchatEffectue", aJ, c);
-            }
-            else if (message.type == Message.Types.PASSER) {
-                this.etatPartie("Passer", aJ, c);
-            }
-
+            switch(message.type){
+                case ACHAT_PROPRIETE :
+                    this.etatPartie("AchatEffectue", aJ, c);
+                    break;
+                case PASSER :
+                    this.etatPartie("Passer", aJ, c);
+                    break;
+                case CARTE_ALLEZ_PRISON :
+                    aJ.setCarreau(this.monopoly.getCarreau(11));
+                    break;
+                case CARTE_DEPLACEMENT :
+                    aJ.setCarreau(this.monopoly.getCarreau());
+            };
       
             
 
