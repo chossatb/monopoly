@@ -12,6 +12,9 @@ public class Joueur {
         public ArrayList<Compagnie> compagnies;
         private ArrayList<ProprieteAConstruire> propietes_a_construire;
 	private Carreau positionCourante;
+        private int nbMaison;
+        private int nbHotel;
+        private boolean prison;
         
         
         public Joueur(String nom, Carreau depart) {
@@ -21,6 +24,9 @@ public class Joueur {
             compagnies = new ArrayList<Compagnie>();
             propietes_a_construire = new ArrayList<ProprieteAConstruire>();
             this.setCarreau(depart);
+            this.nbMaison = 0;
+            this.nbHotel = 0;
+            this.prison = false;
         }
         
         public String getNom(){
@@ -42,6 +48,10 @@ public class Joueur {
         
         public void diminuerCash(int val){
             this.cash = this.cash - val;
+        }
+        
+        public void encaisserGain(int gain){
+            this.cash = this.cash + gain;
         }
 
 	public Carreau getPosCourante() {
@@ -73,6 +83,23 @@ public class Joueur {
         public int getNbProprietes(){
             return getPropietes_a_construire().size();
         }
+
+        public int getNbMaison() {
+            return nbMaison;
+        }
+
+        public int getNbHotel() {
+            return nbHotel;
+        }
+        
+        public boolean estEnPrison(){
+            return prison;
+        }
+        
+        public void allerEnPrison(){
+            this.prison = true;
+        }
+        
 
     /**
      * @return the propietes_a_construire

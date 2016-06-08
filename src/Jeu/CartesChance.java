@@ -16,6 +16,7 @@ public class CartesChance {
     private int prix;
     private int prixParMaison;
     private int prixParHotel;
+    private Monopoly mono;
     
     public CartesChance(String nom, int num){
         setNom(nom);
@@ -24,6 +25,7 @@ public class CartesChance {
         setPrix(0);
         setPrixParMaison(0);
         setPrixParHotel(0);
+        mono.getCarreau()
         
     }
     

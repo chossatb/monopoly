@@ -16,7 +16,10 @@ public class Message {
     public enum Types{
         ACHETER_OU_PAS,
         ACHAT_PROPRIETE,
-        PASSER  
+        PASSER,
+        CARTE_AMENDE,
+        CARTE_DEPLACEMENT,
+        CARTE_MAISON_HOTEL
     };
     
     public Types type;

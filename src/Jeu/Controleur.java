@@ -95,6 +95,16 @@ public class Controleur {
                }
                
             }
+            if (c instanceof Chance){
+                ((Chance) c).tirerCarte();
+                choix = null;
+                message = ((Chance) c).action(aJ, nbdoubles, choix);
+            }
+            if (c instanceof CaisseDeCommunaute){
+                ((CaisseDeCommunaute) c).tirerCarte();
+                choix = null;
+                message = ((CaisseDeCommunaute) c).action(aJ, nbdoubles, choix);
+            }
                
             if (message.type == Message.Types.ACHAT_PROPRIETE) {
                 this.etatPartie("AchatEffectue", aJ, c);
