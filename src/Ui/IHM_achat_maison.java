@@ -23,38 +23,62 @@ public class IHM_achat_maison extends JFrame{
     
 	private Controleur controleur;
         private JComboBox comb_choix = new JComboBox();
+        private Joueur j;
         
         
         
-        public IHM_achat_maison(Controleur c){
-            this.controleur= c;            
+        public IHM_achat_maison(Joueur aJ, Controleur c){
+            this.controleur= c;    
+            this.j = aJ;
         }
         
         public void afficher() {
             initUiComponents(); 
             setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.setTitle("Monopoly");
-            setSize(350, 250);
+            setSize(500, 1000);
             setVisible(true);                        
         }
         
         public void initUiComponents(){
             this.setLayout(new BorderLayout());
-            this.add(new JLabel("Combien voulez vous acheter de maison ?"), BorderLayout.NORTH);
-           
+ 
             comb_choix.addItem("Aucune");
-           /* for (i = 1; i<controleur.getMonopoly(). ; i++) {
-                
-            }*/
+            
+            for (ProprieteAConstruire p : j.getPropietes_a_construire()) {
+                if (p.getNbMaison() != 4){
+                    comb_choix.addItem(p.getNomCarreau());
+                }
+            }
             
             
-            JPanel pan_choix = new JPanel(new GridLayout());
-            pan_choix.add(comb_choix);
+            JButton but_acheter = new JButton("Acheter");
+            but_acheter.addActionListener((ActionEvent e) -> {
+                    majJoueurDepuisIhm();
+                });
+            
+            JButton but_annuler = new JButton("Annuler");
+            this.add(new JLabel("Sur quelle propriété voulez vous acheter la maison ?"), BorderLayout.NORTH);
+            this.add(comb_choix, BorderLayout.CENTER);
+            this.add(but_acheter, BorderLayout.SOUTH);
+            this.add(but_annuler, BorderLayout.SOUTH);
+            
+            
         }
         
     
-    public void majJoueurDepuisIhm(){
-        
-    } 
+        public void majJoueurDepuisIhm(){
+            for (ProprieteAConstruire p : j.getPropietes_a_construire()) {
+                if (p.getNomCarreau() == comb_choix.getSelectedItem().toString()) {
+                    if (p.getNbMaison() <= 4){
+                        p.addMaison();
+                    }
+                    else if (p.getNbMaison() == 4) {
+                        p.addHotel();
+                    }
+                }
+            }
+            
+        } 
         
 }

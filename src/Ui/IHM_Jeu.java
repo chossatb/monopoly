@@ -294,10 +294,12 @@ public class IHM_Jeu extends JFrame{
 
         }
         
-        public String choixMaison(Carreau carreau,int prix){  
-            int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter une maison ? (Prix = " + prix + ")","Achat",JOptionPane.YES_NO_OPTION);
+        public String choixMaison(Joueur aJ, Carreau carreau,int prix){  
+            int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter une maison ?","Achat",JOptionPane.YES_NO_OPTION);
             if (n == 0){
-                String nom = JOptionPane.showInputDialog(this, "Combien voulez vous acheter de maison ?", "Gendarmerie nationale !", JOptionPane.QUESTION_MESSAGE);
+                IHM_achat_maison ihmachat = new IHM_achat_maison(aJ, controleur);
+                
+                //IHM achat maison
                 return "y";
             }
             else {

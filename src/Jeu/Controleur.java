@@ -92,6 +92,7 @@ public class Controleur {
                
                if (jProprio.getNom().equals(aJ.getNom())){
                    choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   //appeler ihm.choixMaison
                }
                
             }
