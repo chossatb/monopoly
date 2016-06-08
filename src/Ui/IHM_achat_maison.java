@@ -30,13 +30,14 @@ public class IHM_achat_maison extends JFrame{
         public IHM_achat_maison(Joueur aJ, Controleur c){
             this.controleur= c;    
             this.j = aJ;
+            this.afficher();
         }
         
         public void afficher() {
             initUiComponents(); 
             setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.setTitle("Monopoly");
-            setSize(500, 1000);
+            setSize(500, 300);
             setVisible(true);                        
         }
         

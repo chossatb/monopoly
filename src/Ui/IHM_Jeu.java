@@ -294,7 +294,7 @@ public class IHM_Jeu extends JFrame{
 
         }
         
-        public String choixMaison(Joueur aJ, Carreau carreau,int prix){  
+        public String choixMaison(Joueur aJ, Carreau carreau){  
             int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter une maison ?","Achat",JOptionPane.YES_NO_OPTION);
             if (n == 0){
                 IHM_achat_maison ihmachat = new IHM_achat_maison(aJ, controleur);

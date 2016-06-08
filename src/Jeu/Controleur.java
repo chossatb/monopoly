@@ -90,8 +90,9 @@ public class Controleur {
                    jProprio.recevoirLoyer(l);
                }
                
-               if (jProprio.getNom().equals(aJ.getNom())){
-                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
+               if (jProprio != null && jProprio.getNom().equals(aJ.getNom())){
+                   //choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   getIhmJeu().choixMaison(aJ, c);
                    //appeler ihm.choixMaison
                }
                
