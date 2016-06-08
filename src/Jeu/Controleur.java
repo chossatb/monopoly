@@ -126,6 +126,7 @@ public class Controleur {
                     Integer i = entry.getKey();
                     Joueur j = entry.getValue();
                     jouerUnCoup(j);
+                    //observateur.notify(de1, de2)
                     if (entry.getValue().getCash() <= 0) {
                         entry.getValue().reinitProprietes();
                         iter.remove();

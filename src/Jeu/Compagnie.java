@@ -19,7 +19,6 @@ public class Compagnie extends Propriete {
                 mess.type=Message.Types.ACHAT_PROPRIETE;
                 return mess;
             } else{
-                this.acheterPropriete(aJ); 
                 mess.type=Message.Types.PASSER;
                 return mess;
             }

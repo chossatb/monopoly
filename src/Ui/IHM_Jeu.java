@@ -285,6 +285,7 @@ public class IHM_Jeu extends JFrame{
         
         public String choixPayer(Carreau carreau,int prix){  
             int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter la case ? (Prix = " + prix + ")","Achat",JOptionPane.YES_NO_OPTION);
+            System.err.println(n);
             if (n == 0){
                 return "y";
             }
