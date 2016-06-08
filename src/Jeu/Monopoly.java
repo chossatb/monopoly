@@ -57,7 +57,12 @@ public class Monopoly {
 
                                 int numero = Integer.parseInt(data.get(i)[1]);
                                 int prixAchat=0;
-                                int prixLoyer=0;
+                                int prixLoyer_nu=0;
+                                int prixLoyer_1_maison=0;
+                                int prixLoyer_2_maisons=0;
+                                int prixLoyer_3_maisons=0;
+                                int prixLoyer_4_maisons=0;
+                                int prixLoyer_1_hotel=0;
                                 
 
                                 
@@ -72,19 +77,32 @@ public class Monopoly {
          
 				if(caseType.compareTo("P") == 0){
                                     prixAchat = Integer.parseInt(data.get(i)[4]);
-                                    prixLoyer = Integer.parseInt(data.get(i)[5]);
-                                    carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
+                                    prixLoyer_nu = Integer.parseInt(data.get(i)[5]);
+                                    prixLoyer_1_maison = Integer.parseInt(data.get(i)[6]);
+                                    prixLoyer_2_maisons = Integer.parseInt(data.get(i)[7]);
+                                    prixLoyer_3_maisons = Integer.parseInt(data.get(i)[8]);
+                                    prixLoyer_4_maisons = Integer.parseInt(data.get(i)[9]);
+                                    prixLoyer_1_hotel = Integer.parseInt(data.get(i)[10]);
+                                    carreaux.put(numero, new ProprieteAConstruire(numero, nom, null, prixAchat, prixLoyer_nu, groupes.get(CouleurPropriete.valueOf(data.get(i)[3]))));
                                 }
 
 				else if(caseType.compareTo("G") == 0){
 					//System.out.println("Gare :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(numero, new Gare(numero, nom, null, prixAchat, prixLoyer));
+                                        carreaux.put(numero, new Gare(numero, nom, null, prixAchat, prixLoyer_nu));
 				}
 				else if(caseType.compareTo("C") == 0){
 					//System.out.println("Compagnie :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
-                                        carreaux.put(numero, new Compagnie(numero, nom, null, prixAchat, prixLoyer));
+                                        carreaux.put(numero, new Compagnie(numero, nom, null, prixAchat, prixLoyer_nu));
 				}
 				else if(caseType.compareTo("AU") == 0){
+                                    // if(nom.compareTo("Caisse de Communauté") == 0){
+                                        //carreaux.put(numero, new CaisseDeCommunaute(numero,nom);
+                                    //}
+                                    //else if(nom.compareTo("Départ") == 0){
+                                        //carreaux.put(numero, new Depart(numero,nom);
+                                    //}else if(nom.compareTo("Impôt sur le revenu") == 0){
+                                        //carreaux.put(numero, new Impots(numero,nom);
+                                    //}
 					//System.out.println("Case Autre :\t" + data.get(i)[2] + "\t@ case " + data.get(i)[1]);
                                         carreaux.put(numero, new AutreCarreau(numero, nom));
 				}
