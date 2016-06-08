@@ -59,11 +59,13 @@ public class IHM_achat_maison extends JFrame{
                 });
             
             JButton but_annuler = new JButton("Annuler");
+            
             this.add(new JLabel("Sur quelle propriété voulez vous acheter la maison ?"), BorderLayout.NORTH);
             this.add(comb_choix, BorderLayout.CENTER);
-            this.add(but_acheter, BorderLayout.SOUTH);
-            this.add(but_annuler, BorderLayout.SOUTH);
-            
+            JPanel pan_but = new JPanel(new BorderLayout());
+            pan_but.add(but_acheter, BorderLayout.EAST);
+            pan_but.add(but_annuler, BorderLayout.WEST);
+            this.add(pan_but, BorderLayout.SOUTH);
             
         }
         

@@ -50,12 +50,11 @@ public class Controleur {
             }
             
             this.etatPartie("Info", aJ, c);
-//            getIhmJeu().infoJoueur(aJ, this); // position, cash, somme lancés etc...
             
             if (c instanceof Gare){
                Joueur jProprio = ((Gare) c).getProprietaire();
                if (jProprio == null){
-                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((Gare) c).getPrixAchat() ); //payer ? (y/n)
+                   choix = this.etatPartie("ChoixPayer", aJ, c);
                    message = ((Gare) c).action(aJ,(this.de1 + this.de2), choix); //si y , message.type = ACHAT, sinon message.type = PASSER
                }
                if (jProprio != null && jProprio != aJ) {
@@ -68,7 +67,7 @@ public class Controleur {
             if (c instanceof Compagnie){
                Joueur jProprio = ((Compagnie) c).getProprietaire();
                if (jProprio == null){
-                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((Compagnie) c).getPrixAchat() );
+                   choix = this.etatPartie("ChoixPayer", aJ, c);
                    message = ((Compagnie) c).action(aJ,(this.de1 + this.de2), choix);
                }
                if (jProprio != null && jProprio != aJ) {
@@ -81,7 +80,7 @@ public class Controleur {
             if (c instanceof ProprieteAConstruire){
                Joueur jProprio = ((ProprieteAConstruire) c).getProprietaire();
                if (jProprio == null){
-                   choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
+                   choix = this.etatPartie("ChoixPayer", aJ, c);
                    message = ((ProprieteAConstruire) c).action(aJ,(this.de1 + this.de2), choix);
                }
                
@@ -92,18 +91,16 @@ public class Controleur {
                }
                
                if (jProprio != null && jProprio.getNom().equals(aJ.getNom())){
-                   //choix = getIhmJeu().choixPayer( aJ.getPosCourante(), ((ProprieteAConstruire) c).getPrixAchat() );
-                   getIhmJeu().choixMaison(aJ, c);
-                   //appeler ihm.choixMaison
+                   this.etatPartie("ChoixMaison", aJ, c);
                }
                
             }
                
             if (message.type == Message.Types.ACHAT_PROPRIETE) {
-                getIhmJeu().achatEffectue(aJ.getCash(), this);
+                this.etatPartie("AchatEffectue", aJ, c);
             }
             else if (message.type == Message.Types.PASSER) {
-                getIhmJeu().passer();
+                this.etatPartie("Passer", aJ, c);
             }
 
       
@@ -111,22 +108,7 @@ public class Controleur {
 
 	}
         
-        public String etatPartie(String etat, Joueur aJ, Carreau c){
-            switch(etat){
-                case "Info":
-                        this.getIhmJeu().infoJoueur(aJ, this); 
-                    break;
-                case "ChoixPayer":
-                        this.choixPayer( aJ.getPosCourante(), c.getPrixAchat() );
-                    break;
-                case "ChoixMaison":
-                    break;  
-                case "AchatEffectue":
-                    break;
-                case "passer":
-                    break; 
-            }
-        }
+
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
             
@@ -163,7 +145,32 @@ public class Controleur {
             
             getIhmJeu().joueurAGagne(joueurs.get(numJoueurGagnant).getNom());
         }
-
+        
+        
+        public String etatPartie(String etat, Joueur aJ, Carreau c){
+            String str = "";
+            switch(etat){
+                case "Info":
+                        this.getIhmJeu().infoJoueur(aJ, this); 
+                    break;
+                case "ChoixPayer":
+                        str = this.getIhmJeu().choixPayer(c, ((Propriete) c).getPrixAchat());
+                    break;
+                case "ChoixMaison":
+                        this.getIhmJeu().choixMaison(aJ, c);
+                    break;  
+                case "AchatEffectue":
+                        getIhmJeu().achatEffectue(aJ.getCash(), this);
+                    break;
+                case "Passer":
+                        getIhmJeu().passer();
+                    break; 
+                
+            }
+            return str;
+        }
+        
+        
 	private Carreau lancerDesAvancer(Joueur aJ) {
 
                        int d = lancerDes();

@@ -269,7 +269,6 @@ public class IHM_Jeu extends JFrame{
         public void infoJoueur(Joueur aJ, Controleur c){
             joueurCourant = aJ;
             this.display(c);
-            //System.out.println("Position = " + aJ.getPosCourante().getNumero() + " " + de1 + "et" + de2 + " : " + aJ.getNom() + " - >  " + aJ.getPosCourante().getNomCarreau());
         }
         
         public void joueurSupprime(String nom){ 
@@ -285,7 +284,6 @@ public class IHM_Jeu extends JFrame{
         
         public String choixPayer(Carreau carreau,int prix){  
             int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter la case ? (Prix = " + prix + ")","Achat",JOptionPane.YES_NO_OPTION);
-            System.err.println(n);
             if (n == 0){
                 return "y";
             }
@@ -299,8 +297,6 @@ public class IHM_Jeu extends JFrame{
             int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter une maison ?","Achat",JOptionPane.YES_NO_OPTION);
             if (n == 0){
                 IHM_achat_maison ihmachat = new IHM_achat_maison(aJ, controleur);
-                
-                //IHM achat maison
                 return "y";
             }
             else {
