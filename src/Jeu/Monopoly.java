@@ -25,22 +25,25 @@ public class Monopoly {
         private HashMap<Integer, Carreau> carreaux;
         private HashMap<Integer, Joueur> joueurs;
         private HashMap<Integer, CartesChance> carteschance;
+        private HashMap<Integer, CartesCaisseDeCommunaute> cartescaisse;
     
         public Monopoly(){
             this.carreaux = new HashMap<Integer, Carreau>();
             this.joueurs =  new HashMap<Integer, Joueur>();
             this.carteschance = new HashMap<Integer, CartesChance>();
+            this.cartescaisse = new HashMap<Integer, CartesCaisseDeCommunaute>();
         }
     
-	public void CreerPlateau(String dataFilename){ //type de retour à vérifier
-		buildGamePlateau(dataFilename);
+	public void CreerPlateau(String dataFilename, String chanceFilename, String caisseFilename){ //type de retour à vérifier
+		buildGamePlateau(dataFilename,chanceFilename,caisseFilename);
 	}
 	
-	private void buildGamePlateau(String dataFilename)
+	private void buildGamePlateau(String dataFilename, String chanceFilename, String caisseFilename)
 	{
 		try{
 			ArrayList<String[]> data = readDataFile(dataFilename, ",");
-			ArrayList<String[]> chance = readDataFile(dataFilename, ",");
+			ArrayList<String[]> chance = readChanceFile(chanceFilename, ",");
+			ArrayList<String[]> caisse = readCaisseFile(caisseFilename, ",");
 			
 			//TODO: create cases instead of displaying
                         
@@ -133,23 +136,43 @@ public class Monopoly {
 			}
                         for(int i = 0; i<chance.size(); ++i){
                             
-                            String caseType = data.get(i)[0];
-                            String nom = data.get(i)[2];
-                            int numero = Integer.parseInt(data.get(i)[1]);
+                            String caseType = chance.get(i)[0];
+                            String nom = chance.get(i)[2];
+                            int numero = Integer.parseInt(chance.get(i)[1]);
                             if (caseType.compareTo("AM") == 0) {
-                                int prixAmende = Integer.parseInt(data.get(i)[3]);
+                                int prixAmende = Integer.parseInt(chance.get(i)[3]);
                                 carteschance.put(numero, new CartesChance(nom, numero, caseType, prixAmende));
                             }
                             else if (caseType.compareTo("GA") == 0) {
-                                int prixGain = Integer.parseInt(data.get(i)[3]);
+                                int prixGain = Integer.parseInt(chance.get(i)[3]);
                                 carteschance.put(numero, new CartesChance(nom, numero, caseType, prixGain));
                             }
                             else if(caseType.compareTo("MH") == 0){
-                                int prixParMaison = Integer.parseInt(data.get(i)[4]);
+                                int prixParMaison = Integer.parseInt(chance.get(i)[4]);
                                 carteschance.put(numero, new CartesChance(nom, numero, caseType, prixParMaison, prixParMaison));
                             }
                             else if(caseType.compareTo("DE") == 0 || caseType.compareTo("LI") == 0 || caseType.compareTo("PR") == 0 ||caseType.compareTo("RE") == 0){
                                 carteschance.put(numero, new CartesChance(nom, numero, caseType));
+                            }
+                            else{
+                                System.err.println("[buildGamePleateau()] : Invalid Data type");
+                            }
+                        }
+                        for(int i = 0; i<caisse.size(); ++i){
+                            
+                            String caseType = caisse.get(i)[0];
+                            String nom = caisse.get(i)[2];
+                            int numero = Integer.parseInt(caisse.get(i)[1]);
+                            if (caseType.compareTo("AM") == 0) {
+                                int prixAmende = Integer.parseInt(caisse.get(i)[3]);
+                                cartescaisse.put(numero, new CartesCaisseDeCommunaute(nom, numero, caseType, prixAmende));
+                            }
+                            else if (caseType.compareTo("GA") == 0 || caseType.compareTo("HB") == 0) {
+                                int prixGain = Integer.parseInt(caisse.get(i)[3]);
+                                cartescaisse.put(numero, new CartesCaisseDeCommunaute(nom, numero, caseType, prixGain));
+                            }
+                            else if(caseType.compareTo("DE") == 0 || caseType.compareTo("LI") == 0 || caseType.compareTo("PR") == 0){
+                                cartescaisse.put(numero, new CartesCaisseDeCommunaute(nom, numero, caseType));
                             }
                             else{
                                 System.err.println("[buildGamePleateau()] : Invalid Data type");
@@ -178,6 +201,33 @@ public class Monopoly {
 		reader.close();
 		
 		return data;
+	}
+        
+        private ArrayList<String[]> readChanceFile(String filename, String token) throws FileNotFoundException, IOException
+	{
+		ArrayList<String[]> chance = new ArrayList<String[]>();
+		
+		BufferedReader reader  = new BufferedReader(new FileReader(filename));
+		String line = null;
+		while((line = reader.readLine()) != null){
+			chance.add(line.split(token));
+		}
+		reader.close();
+		
+		return chance;
+	}
+        private ArrayList<String[]> readCaisseFile(String filename, String token) throws FileNotFoundException, IOException
+	{
+		ArrayList<String[]> caisse = new ArrayList<String[]>();
+		
+		BufferedReader reader  = new BufferedReader(new FileReader(filename));
+		String line = null;
+		while((line = reader.readLine()) != null){
+			caisse.add(line.split(token));
+		}
+		reader.close();
+		
+		return caisse;
 	}
 
         

@@ -12,11 +12,11 @@ import Data.Message;
  * @author guinatha
  */
 public class CaisseDeCommunaute extends AutreCarreau {
-    private CarteCaisseDeCommunaute carte;
+    private CartesCaisseDeCommunaute carte;
     
     public CaisseDeCommunaute(int num, String nom){
         super(num, nom);
-        this.carte = new CarteCaisseDeCommunaute(nom, num);
+        this.carte = new CartesCaisseDeCommunaute(nom, num);
         
     }
     

@@ -9,27 +9,27 @@ package Jeu;
  *
  * @author guinatha
  */
-public class CarteCaisseDeCommunaute {
+public class CartesCaisseDeCommunaute {
     private String nom;
     private int num;
     private String type;
     private int prix;
     
-    public CarteCaisseDeCommunaute(String nom, int num){
+    public CartesCaisseDeCommunaute(String nom, int num){
         setNom(nom);
         setNum(num);
         setType("");
         setPrix(0);
     }
     
-    public CarteCaisseDeCommunaute(String nom, int num, String type){
+    public CartesCaisseDeCommunaute(String nom, int num, String type){
         setNom(nom);
         setNum(num);
         setType(type);
         setPrix(0);
     }
     
-    public CarteCaisseDeCommunaute(String nom, int num, String type, int prix){
+    public CartesCaisseDeCommunaute(String nom, int num, String type, int prix){
         setNom(nom);
         setNum(num);
         setType(type);
