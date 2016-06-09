@@ -19,6 +19,8 @@ public class IHM_Jeu extends JFrame{
 
         private JButton but_Demarrer;
         private JButton but_Quitter;
+        JButton but_lancerDes;
+        JButton but_joueurSuivant;
         
         
         private JPanel pan_joueur;
@@ -67,7 +69,8 @@ public class IHM_Jeu extends JFrame{
                 but_Demarrer = new JButton("Démarrer");
                 but_Demarrer.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_Demarrer.getMinimumSize().height+10));
                 but_Demarrer.addActionListener((ActionEvent e) -> {
-                    controleur.jouerPlusieursTours(joueurs);
+                    but_lancerDes.setEnabled(true);
+                    but_Demarrer.setEnabled(false);
                 });
 
                 but_Quitter = new JButton("Quitter");
@@ -114,6 +117,29 @@ public class IHM_Jeu extends JFrame{
                 JPanel pan_EC = new JPanel();
                 pan_EC.setLayout(new BoxLayout(pan_EC, BoxLayout.PAGE_AXIS));
                 pan_EC.setBackground(Color.LIGHT_GRAY);
+                
+                but_lancerDes = new JButton("Lancer les dés");
+                but_lancerDes.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_Demarrer.getMinimumSize().height+10));
+                but_joueurSuivant = new JButton("Joueur Suivant");
+                but_joueurSuivant.setMaximumSize(new Dimension(Integer.MAX_VALUE, but_Demarrer.getMinimumSize().height+10));
+                
+                but_lancerDes.addActionListener((ActionEvent e) -> {
+                    controleur.lancerDesAvancer(joueurCourant);
+                    but_lancerDes.setEnabled(false);
+                    but_joueurSuivant.setEnabled(true);
+                    controleur.jouerUnCoup(joueurCourant);
+                    this.display(controleur);
+                });
+                
+                but_joueurSuivant.addActionListener((ActionEvent e) -> {
+                    joueurCourant = controleur.joueurSuivant(joueurs, joueurCourant);
+                    this.display(controleur);
+                    but_joueurSuivant.setEnabled(false);
+                    but_lancerDes.setEnabled(true);
+                });
+                
+                pan_EC.add(but_lancerDes);
+                pan_EC.add(but_joueurSuivant);
 
 
 
@@ -145,6 +171,9 @@ public class IHM_Jeu extends JFrame{
                  tab_argent = new JLabel[controleur.getMonopoly().getJoueurs().size()];
                  tab_caseActuelle = new JLabel[controleur.getMonopoly().getJoueurs().size()];
                  tab_nomJ = new TitledBorder[controleur.getMonopoly().getJoueurs().size()];
+                 
+                 
+                 joueurCourant = controleur.getMonopoly().getJoueurs().get(0);
                  
                  //Initialisation des Labels info_joueurs
                  for (int i = 0 ; i < controleur.getMonopoly().getJoueurs().size(); i++){
@@ -181,6 +210,9 @@ public class IHM_Jeu extends JFrame{
                 this.pan_center.add( lab_image, BorderLayout.EAST);
 
                 this.add(pan_center, BorderLayout.CENTER);
+                
+                but_joueurSuivant.setEnabled(false);
+                but_lancerDes.setEnabled(false);
 
         }
         
@@ -296,6 +328,7 @@ public class IHM_Jeu extends JFrame{
         public String choixMaison(Joueur aJ, Carreau carreau){  
             int n = JOptionPane.showConfirmDialog(this,"Vous êtes sur la case " + carreau.getNomCarreau() + ".\n" + "Voulez vous acheter une maison ?","Achat",JOptionPane.YES_NO_OPTION);
             if (n == 0){
+                int i=0;
                 IHM_achat_maison ihmachat = new IHM_achat_maison(aJ, controleur);
                 return "y";
             }

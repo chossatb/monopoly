@@ -90,24 +90,27 @@ public class IHM_CreationJoueurs extends JFrame{
             if (!champs[i].getText().equals("")){
                 if (i == 0){
                     joueurs.put(compteur, new Joueur(champs[i].getText(), controleur.getMonopoly().getCarreau(1)));
+                    compteur++;
                 }else{
                     Iterator<Map.Entry<Integer,Joueur>> iter = joueurs.entrySet().iterator();
                     while (iter.hasNext()){   
                         Map.Entry<Integer, Joueur> e = iter.next();
                          if (joueurs.size() >= 1 && champs[i].getText().equals(e.getValue().getNom())){
-                             System.err.println("lol");
+
                             trouve = true;
                             break;
                          }
                          else{
-                             System.err.println("ici");
+
                              joueurs.put(compteur, new Joueur(champs[i].getText(), controleur.getMonopoly().getCarreau(1)));
+                             compteur++;
                              break;
                          }
                     }
                 }
+                
             }
-            compteur++;
+
         }
         
     

@@ -152,6 +152,20 @@ public class Controleur {
 
 	}
         
+        public Joueur joueurSuivant(HashMap<Integer, Joueur> joueursRestant, Joueur jCourant){
+            int compteur = 0;
+            for (HashMap.Entry<Integer,Joueur> e : joueursRestant.entrySet()) {
+                if (jCourant == e.getValue()){
+                    break;
+                }else{
+                    compteur++;
+                }
+            }
+            
+            return(joueursRestant.get((compteur + 1) % joueursRestant.size()));
+            
+        }        
+        
 
         
         public void jouerPlusieursTours(HashMap<Integer, Joueur> joueurs){
@@ -215,7 +229,7 @@ public class Controleur {
         }
         
         
-	private Carreau lancerDesAvancer(Joueur aJ) {
+	public Carreau lancerDesAvancer(Joueur aJ) {
 
                        int d = lancerDes();
 

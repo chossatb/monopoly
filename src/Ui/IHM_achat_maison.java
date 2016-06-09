@@ -24,6 +24,7 @@ public class IHM_achat_maison extends JFrame{
 	private Controleur controleur;
         private JComboBox comb_choix = new JComboBox();
         private Joueur j;
+        private boolean cliked;
         
         
         
@@ -34,16 +35,16 @@ public class IHM_achat_maison extends JFrame{
         }
         
         public void afficher() {
+            cliked =false;
             initUiComponents(); 
-            setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+            //setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.setTitle("Monopoly");
-            setSize(500, 300);
-            setVisible(true);                        
+            setSize(385, 100);
+            setVisible(true);
         }
         
         public void initUiComponents(){
             this.setLayout(new BorderLayout());
- 
             comb_choix.addItem("Aucune");
             
             for (ProprieteAConstruire p : j.getPropietes_a_construire()) {
@@ -56,15 +57,18 @@ public class IHM_achat_maison extends JFrame{
             JButton but_acheter = new JButton("Acheter");
             but_acheter.addActionListener((ActionEvent e) -> {
                     majJoueurDepuisIhm();
-                });
+
+            });
             
             JButton but_annuler = new JButton("Annuler");
+            but_acheter.addActionListener((ActionEvent e) -> {
+            });
             
             this.add(new JLabel("Sur quelle propriété voulez vous acheter la maison ?"), BorderLayout.NORTH);
             this.add(comb_choix, BorderLayout.CENTER);
             JPanel pan_but = new JPanel(new BorderLayout());
-            pan_but.add(but_acheter, BorderLayout.EAST);
-            pan_but.add(but_annuler, BorderLayout.WEST);
+            pan_but.add(but_acheter, BorderLayout.WEST);
+            pan_but.add(but_annuler, BorderLayout.EAST);
             this.add(pan_but, BorderLayout.SOUTH);
             
         }
