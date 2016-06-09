@@ -1,0 +1,16 @@
+LI,1,Vous êtes libéré de prison,0,0,0
+RE,2,Reculez de trois cases,0,0,0
+MH,3,Vous êtes imposés pour les réparations de voirie à raison de : 40 € par maison et 115€ par hôtel,0,-40,-115
+AM,4,Amende excès de vitesse,-15,0,0
+MH,5,Faites des réparations dans toutes vos maisons : versez pour chaque maison 25€ et pour chaque hôtel 100€,0,-25,-100
+AM,6,Amende pour ivresse,-20,0,0
+DE,7,Avancez jusqu'à la case départ,0,0,0,Départ,1
+PR,8,Allez en prison,0,0,0,Allez en prison,31
+HM,9,Rendez-vous à l'Avenue Henri-Martin,0,0,0,Avenue Henri-Martin,25
+GL,10,Allez à la Gare de Lyon,0,0,0,Gare de Lyon,16
+AM,11,Payez pour frais de scolarité,-150,0,0
+GA,12,Vous avez gagné le prix mots croisés,100,0,0
+GA,13,Versement de la Banque,50,0,0
+RP,14,Rendez-vous à la Rue de la Paix,0,0,0,Rue de la Paix,40
+GA,15,Votre immeuble et votre prêt rapportent,150,0,0
+BV,16,Accédez au Boulevard de la Vilette,0,0,0,Boulevard de la Vilette,12

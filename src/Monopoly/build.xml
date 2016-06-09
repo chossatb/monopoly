@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build">
+	<path id="build.classpath">
+		<pathelement location="classes"/>
+	</path>
+	<target name="init">
+		<mkdir dir="classes"/>
+	</target>
+	<target name="clean">
+		<delete dir="classes"/>
+	</target>
+	<target depends="init" name="build">
+		<javac srcdir="." destdir="classes" source="1.5" target="1.5" fork="yes">
+			<classpath refid="build.classpath"/>
+			<include name="IHM.java"/>
+			<include name="Diagramme_de_packages/Controleur.java"/>
+			<include name="Monopoly.java"/>
+			<include name="Joueur.java"/>
+			<include name="Gare.java"/>
+			<include name="Carreau.java"/>
+			<include name="Diagramme_du_domaine/AutreCarreau.java"/>
+			<include name="Diagramme_du_domaine/Compagnie.java"/>
+			<include name="Diagramme_du_domaine/ProprieteAConstruire.java"/>
+			<include name="CouleurPropriete.java"/>
+			<include name="Groupe.java"/>
+		</javac>
+	</target>
+</project>
