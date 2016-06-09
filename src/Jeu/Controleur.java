@@ -117,6 +117,7 @@ public class Controleur {
                     aJ.setCarreau(this.monopoly.getCarreau(11));
                     break;
                 case CARTE_DEPLACEMENT :
+                    switch()
                     aJ.setCarreau(this.monopoly.getCarreau());
             };
       
