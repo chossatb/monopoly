@@ -18,12 +18,17 @@ public class Message {
         ACHAT_PROPRIETE,
         PASSER,
         CARTE_AMENDE,
-        CARTE_DEPLACEMENT,
         CARTE_MAISON_HOTEL,
         CARTE_GAIN,
         CARTE_ALLEZ_PRISON,
         CARTE_LIBERE_PRISON,
-        CARTE_RECULER
+        CARTE_RECULER,
+        CARTE_DEPART,
+        CARTE_GARE_DE_LYON,
+        CARTE_AVENUE_HENRI_MARTIN,
+        CARTE_RUE_DE_LA_PAIX,
+        CARTE_BOULEVARD_DE_LA_VILETTE,
+        CARTE_DEPLACEMENT,
     };
     
     public Types type;
