@@ -77,18 +77,18 @@ public class IHM_Jeu extends JFrame{
                 });
                 
             // Gestion de l'image monopoly
-                ImageIcon image = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/monopoly.jpg");
+                ImageIcon image = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/monopoly.jpg");
                 JLabel lab_image = new JLabel(image);
             
             // Gestion des images dés   
                 images = new ImageIcon[7];
-                images[0] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de0.jpg");
-                images[1] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de1.jpg");
-                images[2] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de2.jpg");
-                images[3] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de3.jpg");
-                images[4] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de4.jpg");
-                images[5] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de5.jpg");
-                images[6] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/Monopoly 1/src/Ui/de6.jpg");           
+                images[0] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de0.jpg");
+                images[1] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de1.jpg");
+                images[2] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de2.jpg");
+                images[3] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de3.jpg");
+                images[4] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de4.jpg");
+                images[5] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de5.jpg");
+                images[6] = new ImageIcon("/users/info/etu-s2/touronl/S2/Projet/monopoly-master/src/Ui/de6.jpg");           
 
                 lab_imageDe1 = new JLabel(images[0]);
                 lab_imageDe2 = new JLabel(images[0]);
