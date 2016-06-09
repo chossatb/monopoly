@@ -105,47 +105,48 @@ public class Controleur {
                 choix = null;
                 message = ((CaisseDeCommunaute) c).action(aJ, nbdoubles, choix);
             }
-               
-            switch(message.type){
-                case ACHAT_PROPRIETE :
-                    this.etatPartie("AchatEffectue", aJ, c);
-                    break;
-                case PASSER :
-                    this.etatPartie("Passer", aJ, c);
-                    break;
-                case CARTE_ALLEZ_PRISON :
-                    aJ.setCarreau(this.monopoly.getCarreau(11));
-                    break;
-                case CARTE_DEPART :
-                    aJ.setCarreau(this.monopoly.getCarreau(1));
-                    break;
-                case CARTE_AVENUE_HENRI_MARTIN :
-                    aJ.setCarreau(this.monopoly.getCarreau(25));
-                    break;
-                case CARTE_GARE_DE_LYON :
-                    aJ.setCarreau(this.monopoly.getCarreau(16));
-                    break;
-                case CARTE_BOULEVARD_DE_LA_VILETTE :
-                    aJ.setCarreau(this.monopoly.getCarreau(12));
-                    break;
-                case CARTE_RUE_DE_LA_PAIX :
-                    aJ.setCarreau(this.monopoly.getCarreau(40));
-                    break;
-                case CARTE_AMENDE :
-                    break;
-                case CARTE_GAIN :
-                    break;
-                case CARTE_LIBERE_PRISON :
-                    break;
-                case CARTE_MAISON_HOTEL :
-                    break;
-                case CARTE_RECULER :
-                    aJ.setCarreau(this.monopoly.getCarreau((aJ.getPosCourante().getNumero()-3)));
-                    break;
-                case CARTE_BELLEVILLE :
-                    aJ.setCarreau(this.monopoly.getCarreau(2));
-                    break;
-            };
+            if (message.type != null){   
+                switch(message.type){
+                    case ACHAT_PROPRIETE :
+                        this.etatPartie("AchatEffectue", aJ, c);
+                        break;
+                    case PASSER :
+                        this.etatPartie("Passer", aJ, c);
+                        break;
+                    case CARTE_ALLEZ_PRISON :
+                        aJ.setCarreau(this.monopoly.getCarreau(11));
+                        break;
+                    case CARTE_DEPART :
+                        aJ.setCarreau(this.monopoly.getCarreau(1));
+                        break;
+                    case CARTE_AVENUE_HENRI_MARTIN :
+                        aJ.setCarreau(this.monopoly.getCarreau(25));
+                        break;
+                    case CARTE_GARE_DE_LYON :
+                        aJ.setCarreau(this.monopoly.getCarreau(16));
+                        break;
+                    case CARTE_BOULEVARD_DE_LA_VILETTE :
+                        aJ.setCarreau(this.monopoly.getCarreau(12));
+                        break;
+                    case CARTE_RUE_DE_LA_PAIX :
+                        aJ.setCarreau(this.monopoly.getCarreau(40));
+                        break;
+                    case CARTE_AMENDE :
+                        break;
+                    case CARTE_GAIN :
+                        break;
+                    case CARTE_LIBERE_PRISON :
+                        break;
+                    case CARTE_MAISON_HOTEL :
+                        break;
+                    case CARTE_RECULER :
+                        aJ.setCarreau(this.monopoly.getCarreau((aJ.getPosCourante().getNumero()-3)));
+                        break;
+                    case CARTE_BELLEVILLE :
+                        aJ.setCarreau(this.monopoly.getCarreau(2));
+                        break;
+                };
+            }
       
             
 
